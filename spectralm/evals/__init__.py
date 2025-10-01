@@ -1,0 +1,1 @@
+"""spectralm.evals — internal eval utilities (see top-level evals/ for full harness)."""

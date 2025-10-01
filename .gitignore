@@ -1,0 +1,92 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+wheels/
+*.so
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.local
+
+# ── Model checkpoints & weights ───────────────────────────────────────────────
+# Large binary files — never commit to git, use DVC or cloud storage
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+models/ablations/
+
+# ── Raw spectral data ──────────────────────────────────────────────────────────
+# .jdx files can be re-downloaded via scripts/download_nist.py
+data/raw/
+# Processed tensors can be regenerated via scripts/preprocess.py
+data/processed/*.pt
+# Keep JSON/stats files (small, reproducibility-critical)
+!data/processed/*.json
+
+# ── Secrets & credentials ──────────────────────────────────────────────────────
+.env
+.env.*
+secrets.json
+credentials.json
+*.key
+*.pem
+
+# ── IDE & OS ───────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+.history/
+
+# ── Jupyter ────────────────────────────────────────────────────────────────────
+# Keep .ipynb files but ignore checkpoint noise
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ── Test & coverage artifacts ──────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ── Generated outputs (regenerable) ───────────────────────────────────────────
+data/processed/figures/
+evals/results/
+evals/failure_cases/annotated/
+evals/failure_cases/figures/
+evals/failure_cases/gallery.html
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+uvicorn.log
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+*.tmp
+*.swp
+*.bak
+.hypothesis/
+profiling/
+*.pyc
+# ── HELP DEV/TEST SCRIPTS ──────────────────────────────────────────────────────────────────────
+*.ps1

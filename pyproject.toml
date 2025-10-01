@@ -1,0 +1,47 @@
+[project]
+name = "spectralm"
+version = "0.3.0"
+description = "Physics-informed NLP for infrared spectrum-to-molecule translation"
+readme = "../README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Farah Rihane", email = "farahr2001@gmail.com" }]
+dependencies = [
+    "torch>=2.10.0",              # was 2.2.0 → latest stable 2.10.0 (Jan 2026)
+    "numpy>=2.0.0",               # 1.26 → modern 2.x series is stable & recommended
+    "scipy>=1.15.0",              # 1.12 → recent stable
+    "pandas>=2.2.3",              # 2.2.0 → latest patch/micro updates
+    "rdkit>=2025.9.6",            # 2024.3.1 → latest Q3 2025 release (2025.09.6)
+    "jcamp>=1.1.2",               # no significant updates → keep
+    "transformers>=5.3.0",        # 4.40 → v5.3.0 is the current stable major series (2026)
+    "fastapi>=0.115.0",           # 0.111 → recent 0.115.x line
+    "uvicorn>=0.34.0",            # 0.29 → recent stable
+    "pydantic>=2.10.0",           # 2.7 → recent 2.10.x
+    "matplotlib>=3.10.0",         # 3.9 → 3.10.x series
+    "seaborn>=0.13.2",            # 0.13.0 → latest patch
+    "tqdm>=4.67.0",               # 4.66 → micro update
+    "rich>=13.9.0",               # 13.7 → recent
+]
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0", 
+    "pytest-cov>=6.0.0", 
+    "ruff>=0.9.0",                # ruff evolves fast
+    "mypy>=1.15.0", 
+    "ipykernel>=6.29.0", 
+    "jupyter>=1.1.0"
+]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["spectralm"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I"]
+
+[tool.mypy]
+strict = false
+ignore_missing_imports = true
