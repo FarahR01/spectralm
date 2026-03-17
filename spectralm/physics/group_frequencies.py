@@ -13,6 +13,7 @@ of Organic Compounds", 8th ed., Table 3-1.
 from __future__ import annotations
 
 import torch
+import torch.nn as nn
 import numpy as np
 from dataclasses import dataclass, field
 from typing import NamedTuple
