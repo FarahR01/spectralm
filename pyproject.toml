@@ -10,6 +10,7 @@ dependencies = [
     "torch>=2.10.0",              # was 2.2.0 → latest stable 2.10.0 (Jan 2026)
     "numpy>=2.0.0",               # 1.26 → modern 2.x series is stable & recommended
     "scipy>=1.15.0",              # 1.12 → recent stable
+    "scikit-learn>=1.6.0",        # ML library for train/test split
     "pandas>=2.2.3",              # 2.2.0 → latest patch/micro updates
     "rdkit>=2025.9.6",            # 2024.3.1 → latest Q3 2025 release (2025.09.6)
     "jcamp>=1.1.2",               # no significant updates → keep
