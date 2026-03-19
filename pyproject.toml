@@ -2,7 +2,7 @@
 name = "spectralm"
 version = "0.3.0"
 description = "Physics-informed NLP for infrared spectrum-to-molecule translation"
-readme = "../README.md"
+readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Farah Rihane", email = "farahr2001@gmail.com" }]
