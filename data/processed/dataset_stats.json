@@ -1,0 +1,24 @@
+{
+  "total_compounds": 239,
+  "train_size": 191,
+  "val_size": 24,
+  "test_size": 24,
+  "parse_failures": 8,
+  "filtered_low_snr": 4,
+  "filtered_no_smiles": 0,
+  "suspect_labels": 98,
+  "snr_mean": 1074.57,
+  "snr_median": 284.71,
+  "snr_min": 10.35,
+  "spectrum_mean": 0.0519,
+  "spectrum_std": 0.122,
+  "wavenumber_axis": {
+    "min": 400.0,
+    "max": 4000.0,
+    "steps": 1800,
+    "resolution_cm": 2.001
+  },
+  "random_seed": 42,
+  "min_snr_filter": 10.0,
+  "preprocessing_version": "1.0.0"
+}

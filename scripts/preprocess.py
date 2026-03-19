@@ -316,6 +316,21 @@ def run_pipeline(
     strata = [get_mw_stratum(r["smiles"]) for r in good_records]
     all_idx = list(range(len(good_records)))
 
+    # Check stratum sizes and merge undersized strata
+    from collections import Counter
+    strata_counts = Counter(strata)
+    undersized = [s for s, count in strata_counts.items() if count < 2]
+    
+    if undersized:
+        console.print(f"  [yellow]Merging undersized strata: {undersized}[/yellow]")
+        # Merge undersized strata into nearest sized stratum
+        merge_into = max(strata_counts.keys())
+        strata = [merge_into if s in undersized else s for s in strata]
+        strata_counts = Counter(strata)
+    
+    strata_counts_str = ", ".join(f"{s}: {c}" for s, c in sorted(strata_counts.items()))
+    console.print(f"  Stratum distribution: {strata_counts_str}")
+
     # Split: train + temp
     test_val_frac = val_frac + test_frac
     train_idx, temp_idx, _, temp_strata = train_test_split(
@@ -324,12 +339,14 @@ def run_pipeline(
         stratify=strata,
         random_state=random_seed,
     )
-    # Split temp → val + test
+# Split temp → val + test
+    # Drop stratify on the second split — temp set is too small
+    # for all strata to have ≥2 members
     relative_test = test_frac / test_val_frac
     val_idx, test_idx = train_test_split(
         temp_idx,
         test_size=relative_test,
-        stratify=temp_strata,
+        stratify=None,
         random_state=random_seed,
     )
 

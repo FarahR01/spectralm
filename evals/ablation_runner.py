@@ -20,6 +20,13 @@ Usage:
 
     # Load cached results and regenerate table only
     python evals/ablation_runner.py --results_dir evals/results --table_only
+
+    # Resume from a specific variant (inclusive)
+    python evals/ablation_runner.py --start_from no_group_freq_penalty
+
+Note:
+    In --table_only mode, each selected variant must already have a cached
+    JSON result in results_dir (for example: evals/results/<variant>.json).
 """
 
 from __future__ import annotations
@@ -47,7 +54,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from spectralm.models import SpectraLM, SpectraLMConfig
 from spectralm.models.encoder import EncoderConfig
 from spectralm.models.transformer import TransformerConfig
-from spectralm.scripts.train import IRSpectraDataset, train
+from scripts.train import IRSpectraDataset, train
 from evals.domain_residuals import DomainResidualScorer
 
 
@@ -203,6 +210,7 @@ class AblationRunner:
         batch_size: int = 32,
         device: str = "cuda",
         quick: bool = False,
+        start_from: str | None = None,
     ):
         self.data_dir    = Path(data_dir)
         self.results_dir = Path(results_dir)
@@ -212,6 +220,17 @@ class AblationRunner:
         self.device     = device
         self.quick      = quick
         self.variants   = _make_variants()
+
+        if start_from:
+            variant_names = [v.name for v in self.variants]
+            if start_from not in variant_names:
+                available = ", ".join(variant_names)
+                raise ValueError(
+                    f"Unknown --start_from variant '{start_from}'. "
+                    f"Available variants: {available}"
+                )
+            start_idx = variant_names.index(start_from)
+            self.variants = self.variants[start_idx:]
 
         # Pre-load test data (shared across all variants)
         self.test_ds = IRSpectraDataset(self.data_dir, split="test", augment=False)
@@ -226,6 +245,11 @@ class AblationRunner:
 
         console.print(f"[bold]Test set:[/bold] {len(self.test_ds):,} samples")
         console.print(f"[bold]Epochs:[/bold] {self.epochs} {'(quick mode)' if quick else ''}")
+        if start_from:
+            console.print(
+                f"[bold]Start from:[/bold] {start_from} "
+                f"({len(self.variants)} variants selected)"
+            )
 
     def run(self, skip_training: bool = False) -> list[AblationVariant]:
         """Run all ablation variants."""
@@ -238,6 +262,12 @@ class AblationRunner:
                     variant.result = json.load(f)
                 variant.trained = True
                 console.print(f"  [green]Loaded cache:[/green] {variant.short_name}")
+                continue
+
+            if skip_training:
+                console.print(
+                    "  [yellow]No cached JSON in --table_only mode — skipping[/yellow]"
+                )
                 continue
 
             console.print(f"\n[bold cyan]Running:[/bold cyan] {variant.short_name}")
@@ -254,13 +284,18 @@ class AblationRunner:
                 ckpt_path = self._train_variant(variant, variant_config, ckpt_path)
 
             if not ckpt_path.exists():
-                console.print(f"  [red]Checkpoint not found — skipping[/red]")
-                continue
+                fallback = self.results_dir / variant.name / "best_model.pt"
+                if fallback.exists():
+                    ckpt_path = fallback
+                else:
+                    console.print(f"  [red]Checkpoint not found — skipping[/red]")
+                    continue
+                
 
             # ── Evaluate ────────────────────────────────────────────────
             model = SpectraLM(variant_config).to(self.device)
-            ckpt  = torch.load(ckpt_path, map_location=self.device, weights_only=False)
-            model.load_state_dict(ckpt["model_state_dict"])
+            if not self._load_checkpoint_state(model, ckpt_path, variant):
+                continue
 
             scorer = DomainResidualScorer(
                 model, device=self.device, verbose=False
@@ -298,6 +333,55 @@ class AblationRunner:
 
         return self.variants
 
+    def _load_checkpoint_state(
+        self,
+        model: SpectraLM,
+        ckpt_path: Path,
+        variant: AblationVariant,
+    ) -> bool:
+        """
+        Load checkpoint state with compatibility handling for historical
+        positional-encoding key names.
+
+        For PE ablations, a mismatch in positional-encoding key names usually
+        indicates an architecture mismatch (continuous PE checkpoint loaded
+        into discrete PE model, or vice versa). We detect and refuse this case
+        so ablation results are not silently corrupted.
+        """
+        ckpt = torch.load(ckpt_path, map_location=self.device, weights_only=False)
+        state_dict = dict(ckpt["model_state_dict"])
+
+        # Detect PE architecture mismatch early.
+        pe_key = "encoder.pos_enc.pe"
+        weight_key = "encoder.pos_enc.weight"
+        uses_continuous_pe = model.config.encoder.use_continuous_pe
+
+        if (not uses_continuous_pe) and pe_key in state_dict and weight_key not in state_dict:
+            console.print(
+                "  [red]Incompatible checkpoint:[/red] model expects discrete PE "
+                f"({weight_key}) but checkpoint contains continuous PE ({pe_key}). "
+                f"Retrain variant '{variant.name}' with the fixed runner."
+            )
+            return False
+        elif uses_continuous_pe and weight_key in state_dict and pe_key not in state_dict:
+            console.print(
+                "  [red]Incompatible checkpoint:[/red] model expects continuous PE "
+                f"({pe_key}) but checkpoint contains discrete PE ({weight_key}). "
+                f"Retrain variant '{variant.name}' with the fixed runner."
+            )
+            return False
+
+        missing, unexpected = model.load_state_dict(state_dict, strict=False)
+        if missing or unexpected:
+            console.print(
+                f"  [yellow]Checkpoint loaded with key differences for {variant.name}[/yellow]"
+            )
+            if missing:
+                console.print(f"    Missing: {missing}")
+            if unexpected:
+                console.print(f"    Unexpected: {unexpected}")
+        return True
+
     def _train_variant(
         self,
         variant: AblationVariant,
@@ -313,15 +397,7 @@ class AblationRunner:
             batch_size=self.batch_size,
             lr=3e-4,
         )
-        # Monkey-patch the config factory for this variant
-        import spectralm.models as sm_models
-        original_config = sm_models.SpectraLMConfig
-        sm_models.SpectraLMConfig = lambda: config  # type: ignore
-
-        try:
-            train(args)
-        finally:
-            sm_models.SpectraLMConfig = original_config  # restore
+        train(args, config=config)
 
         trained_ckpt = Path(args.ckpt_dir) / "best_model.pt"
         return trained_ckpt
@@ -372,7 +448,7 @@ class AblationRunner:
             })
         with open(path, "w") as f:
             json.dump(rows, f, indent=2)
-        console.print(f"[green]Ablation table saved →[/green] {path}")
+        console.print(f"[green]Ablation table saved to:[/green] {path}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -446,11 +522,17 @@ if __name__ == "__main__":
     parser.add_argument("--results_dir", type=str, default="evals/results")
     parser.add_argument("--epochs",      type=int, default=60)
     parser.add_argument("--batch_size",  type=int, default=32)
-    parser.add_argument("--device",      type=str, default="cuda")
+    parser.add_argument("--device", type=str, default="cpu")
     parser.add_argument("--quick",       action="store_true",
                         help="5 epochs per variant + 200 eval samples (for CI/testing)")
     parser.add_argument("--table_only",  action="store_true",
-                        help="Skip training, load cached results and print table")
+                        help="Skip training and use only cached JSON results from results_dir")
+    parser.add_argument(
+        "--start_from",
+        type=str,
+        default=None,
+        help="Start ablation run from this variant name (inclusive)",
+    )
     args = parser.parse_args()
 
     runner = AblationRunner(
@@ -460,6 +542,7 @@ if __name__ == "__main__":
         batch_size=args.batch_size,
         device=args.device,
         quick=args.quick,
+        start_from=args.start_from,
     )
 
     runner.run(skip_training=args.table_only)

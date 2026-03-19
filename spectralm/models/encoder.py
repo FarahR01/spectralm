@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import math
 import torch
+import torch as _torch
 import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass, field
@@ -140,8 +141,11 @@ class SpectralEncoder(nn.Module):
 
         # Compute output width: W / 2^num_layers
         num_layers     = len(config.cnn_kernels)
-        self.out_width = config.wavenumber_steps // (2 ** num_layers)
-        final_ch       = config.cnn_channels[-1]
+        with _torch.no_grad():
+            _x = _torch.zeros(1, 1, config.wavenumber_steps)
+            _x = self.cnn(_x)
+            self.out_width = _x.shape[-1]
+            final_ch       = config.cnn_channels[-1]
 
         # ── Positional encoding on downsampled wavenumber axis ─────────────
         if config.use_continuous_pe:

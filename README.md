@@ -4,6 +4,19 @@
 
 ---
 
+## 🎬 Quick Start Video
+
+Watch the SpectraLM Quickstart Guide to get started quickly:
+
+<video width="100%" controls>
+  <source src="SpectraLM Quickstart Guide.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+**[Download Video](SpectraLM%20Quickstart%20Guide.mp4)** | [Full Documentation](#reproducing-results)
+
+---
+
 ## The Problem Nobody Talks About
 
 Analytical chemists spend 30–60% of their time manually interpreting infrared spectra. Every molecule has a unique vibrational fingerprint — a pattern of absorption peaks across the infrared region that encodes its functional groups, bonding environment, and molecular structure. Reading that fingerprint fluently takes years of training.

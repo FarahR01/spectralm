@@ -340,7 +340,7 @@ class DomainResidualScorer:
         model: SpectraLM,
         device: str | torch.device = "cpu",
         implausibility_threshold: float = 0.25,
-        beam_size: int = 4,
+        beam_size: int = 1,
         verbose: bool = True,
     ):
         self.model = model
@@ -395,7 +395,7 @@ class DomainResidualScorer:
             with torch.no_grad():
                 results = self.model.predict(
                     spectra,
-                    beam_size=self.beam_size,
+                    beam_size=1,
                     return_diagnostics=True,
                 )
             inf_ms = (time.time() - t_inf) * 1000 / B

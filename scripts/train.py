@@ -24,7 +24,6 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.cuda.amp import GradScaler, autocast
 from torch.utils.data import DataLoader, Dataset
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TimeElapsedColumn
@@ -96,7 +95,7 @@ class IRSpectraDataset(Dataset):
 def compute_loss(
     model: SpectraLM,
     batch: dict[str, torch.Tensor],
-    physics_lambda_scale: float = 1.0,  # Annealing multiplier
+    physics_scale: float = 1.0,  # Annealing multiplier
 ) -> tuple[torch.Tensor, dict]:
     """
     Total loss = CE_loss + λ_scale * (λ_bl * BL_ECR + λ_gf * GF_penalty)
@@ -124,8 +123,8 @@ def compute_loss(
 
     # ── Physics losses (annealed) ──────────────────────────────────────────
     cfg = model.config
-    bl_loss = out["bl_loss"] * cfg.lambda_beer_lambert * physics_lambda_scale
-    gf_loss = out["gf_loss"] * cfg.lambda_group_freq * physics_lambda_scale
+    bl_loss = out["bl_loss"] * cfg.lambda_beer_lambert * physics_scale
+    gf_loss = out["gf_loss"] * cfg.lambda_group_freq * physics_scale
 
     total_loss = ce_loss + bl_loss + gf_loss
 
@@ -158,7 +157,7 @@ def physics_lambda_schedule(epoch: int, warmup_epochs: int = 10) -> float:
 
 
 # ── Training loop ─────────────────────────────────────────────────────────────
-def train(args: argparse.Namespace):
+def train(args: argparse.Namespace, config: SpectraLMConfig | None = None):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     console.print(f"[bold]Device:[/bold] {device}")
 
@@ -177,7 +176,8 @@ def train(args: argparse.Namespace):
     console.print(f"Train: {len(train_ds):,} | Val: {len(val_ds):,}")
 
     # ── Model ─────────────────────────────────────────────────────────────
-    config = SpectraLMConfig()
+    if config is None:
+        config = SpectraLMConfig()
     model = SpectraLM(config).to(device)
     console.print(f"Parameters: {model.num_parameters:,}")
 
@@ -196,7 +196,7 @@ def train(args: argparse.Namespace):
         return 0.5 * (1.0 + math.cos(math.pi * progress))
 
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimiser, lr_lambda)
-    scaler = GradScaler(enabled=(device.type == "cuda"))
+    scaler = torch.amp.GradScaler("cuda", enabled=(device.type == "cuda"))
 
     # ── Checkpoint dir ────────────────────────────────────────────────────
     ckpt_dir = Path(args.ckpt_dir)
@@ -221,7 +221,7 @@ def train(args: argparse.Namespace):
                 batch = {k: v.to(device) for k, v in batch.items()}
                 optimiser.zero_grad()
 
-                with autocast(dtype=torch.bfloat16, enabled=(device.type == "cuda")):
+                with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=(device.type == "cuda")):
                     loss, metrics = compute_loss(model, batch, physics_scale)
 
                 scaler.scale(loss).backward()
@@ -240,7 +240,7 @@ def train(args: argparse.Namespace):
         with torch.no_grad():
             for batch in val_loader:
                 batch = {k: v.to(device) for k, v in batch.items()}
-                with autocast(dtype=torch.bfloat16, enabled=(device.type == "cuda")):
+                with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=(device.type == "cuda")):
                     _, metrics = compute_loss(model, batch, physics_scale=1.0)
                 val_metrics.append(metrics)
 
@@ -283,7 +283,7 @@ def train(args: argparse.Namespace):
                 "epoch": epoch,
                 "model_state_dict": model.state_dict(),
                 "optimiser_state_dict": optimiser.state_dict(),
-                "config": config,
+                "config": None,
                 "val_ecr": best_val_ecr,
                 "history": history,
             }, ckpt_dir / "best_model.pt")

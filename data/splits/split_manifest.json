@@ -1,0 +1,2153 @@
+[
+  {
+    "cas": "100-66-3",
+    "title": "Benzene, methoxy-",
+    "smiles": "COc1ccccc1",
+    "split": "train",
+    "snr": 218.43,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "626-93-7",
+    "title": "2-Hexanol",
+    "smiles": "CCCCC(C)O",
+    "split": "train",
+    "snr": 2154.49,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "71-55-6",
+    "title": "Ethane, 1,1,1-trichloro-",
+    "smiles": "CC(Cl)(Cl)Cl",
+    "split": "train",
+    "snr": 3492.12,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "107-39-1",
+    "title": "2,4,4-Trimethyl-1-pentene",
+    "smiles": "C=C(C)CC(C)(C)C",
+    "split": "train",
+    "snr": 311.15,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "123-11-5",
+    "title": "Benzaldehyde, 4-methoxy-",
+    "smiles": "COc1ccc(C=O)cc1",
+    "split": "train",
+    "snr": 385.57,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "110-58-7",
+    "title": "n-Amylamine",
+    "smiles": "CCCCCN",
+    "split": "train",
+    "snr": 817.3,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "629-62-9",
+    "title": "Pentadecane",
+    "smiles": "CCCCCCCCCCCCCCC",
+    "split": "train",
+    "snr": 7473.16,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "334-48-5",
+    "title": "Decanoic acid",
+    "smiles": "CCCCCCCCCC(=O)O",
+    "split": "train",
+    "snr": 17.73,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "108-38-3",
+    "title": "Benzene, 1,3-dimethyl-",
+    "smiles": "Cc1cccc(C)c1",
+    "split": "train",
+    "snr": 86.86,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "123-19-3",
+    "title": "4-Heptanone",
+    "smiles": "CCCC(=O)CCC",
+    "split": "train",
+    "snr": 311.99,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "1942-45-6",
+    "title": "4-Octyne",
+    "smiles": "CCCC#CCCC",
+    "split": "train",
+    "snr": 2153.36,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "111-71-7",
+    "title": "Heptanal",
+    "smiles": "CCCCCCC=O",
+    "split": "train",
+    "snr": 263.81,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "99-87-6",
+    "title": "Benzene, 1-methyl-4-(1-methylethyl)-",
+    "smiles": "Cc1ccc(C(C)C)cc1",
+    "split": "train",
+    "snr": 159.58,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "622-97-9",
+    "title": "4-Methylstyrene",
+    "smiles": "C=Cc1ccc(C)cc1",
+    "split": "train",
+    "snr": 29.27,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "71-36-3",
+    "title": "1-Butanol",
+    "smiles": "CCCCO",
+    "split": "train",
+    "snr": 2733.42,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "934-74-7",
+    "title": "1,3-DIMETHYL-5-ETHYL BENZENE",
+    "smiles": "CCc1cc(C)cc(C)c1",
+    "split": "train",
+    "snr": 411.8,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "93-89-0",
+    "title": "Benzoic acid, ethyl ester",
+    "smiles": "CCOC(=O)c1ccccc1",
+    "split": "train",
+    "snr": 411.94,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "619-55-6",
+    "title": "p-Toluamide",
+    "smiles": "Cc1ccc(C(N)=O)cc1",
+    "split": "train",
+    "snr": 278.91,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-41-4",
+    "title": "Ethylbenzene",
+    "smiles": "CCc1ccccc1",
+    "split": "train",
+    "snr": 74.27,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "544-76-3",
+    "title": "Hexadecane",
+    "smiles": "CCCCCCCCCCCCCCCC",
+    "split": "train",
+    "snr": 8284.01,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "107-06-2",
+    "title": "Ethane, 1,2-dichloro-",
+    "smiles": "ClCCCl",
+    "split": "train",
+    "snr": 1563.59,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "93-58-3",
+    "title": "Benzoic acid, methyl ester",
+    "smiles": "COC(=O)c1ccccc1",
+    "split": "train",
+    "snr": 199.29,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "108-91-8",
+    "title": "Cyclohexanamine",
+    "smiles": "NC1CCCCC1",
+    "split": "train",
+    "snr": 1891.37,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "592-76-7",
+    "title": "1-Heptene",
+    "smiles": "C=CCCCCC",
+    "split": "train",
+    "snr": 173.25,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "646-04-8",
+    "title": "trans-2-Pentene",
+    "smiles": "C/C=C/CC",
+    "split": "train",
+    "snr": 540.64,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "95-51-2",
+    "title": "o-Chloroaniline",
+    "smiles": "Nc1ccccc1Cl",
+    "split": "train",
+    "snr": 151.08,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "105-54-4",
+    "title": "Butanoic acid, ethyl ester",
+    "smiles": "CCCC(=O)OCC",
+    "split": "train",
+    "snr": 183.21,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "627-19-0",
+    "title": "1-Pentyne",
+    "smiles": "C#CCCC",
+    "split": "train",
+    "snr": 2664.16,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "123-86-4",
+    "title": "Acetic acid, butyl ester",
+    "smiles": "CCCCOC(C)=O",
+    "split": "train",
+    "snr": 149.55,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "104-55-2",
+    "title": "PROPENALDEHYDE, 3-PHENYL-",
+    "smiles": "O=CC=Cc1ccccc1",
+    "split": "train",
+    "snr": 367.89,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "108-94-1",
+    "title": "Cyclohexanone",
+    "smiles": "O=C1CCCCC1",
+    "split": "train",
+    "snr": 113.99,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-52-7",
+    "title": "Benzaldehyde",
+    "smiles": "O=Cc1ccccc1",
+    "split": "train",
+    "snr": 227.42,
+    "label_consistency": 0.75,
+    "label_suspect": false
+  },
+  {
+    "cas": "71-43-2",
+    "title": "Benzene",
+    "smiles": "c1ccccc1",
+    "split": "train",
+    "snr": 34.82,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "66-25-1",
+    "title": "Hexanal",
+    "smiles": "CCCCCC=O",
+    "split": "train",
+    "snr": 77.67,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "123-72-8",
+    "title": "Butanal",
+    "smiles": "CCCC=O",
+    "split": "train",
+    "snr": 60.39,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "2004-69-5",
+    "title": "trans-3-Penten-1-yne",
+    "smiles": "C#C/C=C/C",
+    "split": "train",
+    "snr": 318.99,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "100-44-7",
+    "title": "Benzyl chloride",
+    "smiles": "ClCc1ccccc1",
+    "split": "train",
+    "snr": 154.96,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "629-14-1",
+    "title": "Ethane, 1,2-diethoxy-",
+    "smiles": "CCOCCOCC",
+    "split": "train",
+    "snr": 265.15,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-65-9",
+    "title": "Octane",
+    "smiles": "CCCCCCCC",
+    "split": "train",
+    "snr": 6120.31,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "94-09-7",
+    "title": "Benzocaine",
+    "smiles": "CCOC(=O)c1ccc(N)cc1",
+    "split": "train",
+    "snr": 591.86,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "143-08-8",
+    "title": "1-Nonanol",
+    "smiles": "CCCCCCCCCO",
+    "split": "train",
+    "snr": 3353.76,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "110-93-0",
+    "title": "5-Hepten-2-one, 6-methyl-",
+    "smiles": "CC(=O)CCC=C(C)C",
+    "split": "train",
+    "snr": 193.1,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "142-62-1",
+    "title": "Hexanoic acid",
+    "smiles": "CCCCCC(=O)O",
+    "split": "train",
+    "snr": 13.65,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "103-50-4",
+    "title": "Benzene, 1,1'-[oxybis(methylene)]bis-",
+    "smiles": "c1ccc(COCc2ccccc2)cc1",
+    "split": "train",
+    "snr": 93.98,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "74-82-8",
+    "title": "Methane",
+    "smiles": "C",
+    "split": "train",
+    "snr": 2218.86,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "65-85-0",
+    "title": "Benzoic Acid",
+    "smiles": "O=C(O)c1ccccc1",
+    "split": "train",
+    "snr": 87.12,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "100-42-5",
+    "title": "BENZENE, ETHENYL-",
+    "smiles": "C=Cc1ccccc1",
+    "split": "train",
+    "snr": 116.91,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "107-87-9",
+    "title": "2-Pentanone",
+    "smiles": "CCCC(C)=O",
+    "split": "train",
+    "snr": 227.27,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-32-1",
+    "title": "Octanoic acid, ethyl ester",
+    "smiles": "CCCCCCCC(=O)OCC",
+    "split": "train",
+    "snr": 137.03,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "75-28-5",
+    "title": "Isobutane",
+    "smiles": "CC(C)C",
+    "split": "train",
+    "snr": 2950.57,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "87-69-4",
+    "title": "L-TARTARIC ACID",
+    "smiles": "O=C(O)[C@@H](O)[C@H](O)C(=O)O",
+    "split": "train",
+    "snr": 45.4,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "1120-16-7",
+    "title": "DODECANAMIDE",
+    "smiles": "CCCCCCCCCCCC(=N)O",
+    "split": "train",
+    "snr": 559.32,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "109-67-1",
+    "title": "1-Pentene",
+    "smiles": "C=CCCC",
+    "split": "train",
+    "snr": 87.04,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "75-64-9",
+    "title": "2-Propanamine, 2-methyl-",
+    "smiles": "CC(C)(C)N",
+    "split": "train",
+    "snr": 1723.08,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "60-35-5",
+    "title": "Acetamide",
+    "smiles": "CC(=N)O",
+    "split": "train",
+    "snr": 307.59,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "108-90-7",
+    "title": "Benzene, chloro-",
+    "smiles": "Clc1ccccc1",
+    "split": "train",
+    "snr": 93.39,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-66-3",
+    "title": "Benzene, methoxy-",
+    "smiles": "COc1ccccc1",
+    "split": "train",
+    "snr": 218.43,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "503-17-3",
+    "title": "2-Butyne",
+    "smiles": "CC#CC",
+    "split": "train",
+    "snr": 831.35,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "75-65-0",
+    "title": "2-Propanol, 2-methyl-",
+    "smiles": "CC(C)(C)O",
+    "split": "train",
+    "snr": 545.94,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "109-99-9",
+    "title": "Furan, tetrahydro-",
+    "smiles": "C1CCOC1",
+    "split": "train",
+    "snr": 296.64,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "60-29-7",
+    "title": "ETHYL ETHER",
+    "smiles": "CCOCC",
+    "split": "train",
+    "snr": 74.53,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "563-45-1",
+    "title": "1-Butene, 3-methyl-",
+    "smiles": "C=CC(C)C",
+    "split": "train",
+    "snr": 137.54,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "109-60-4",
+    "title": "n-Propyl acetate",
+    "smiles": "CCCOC(C)=O",
+    "split": "train",
+    "snr": 146.1,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "74-97-5",
+    "title": "Methane, bromochloro-",
+    "smiles": "ClCBr",
+    "split": "train",
+    "snr": 1570.32,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "112-14-1",
+    "title": "Acetic acid, octyl ester",
+    "smiles": "CCCCCCCCOC(C)=O",
+    "split": "train",
+    "snr": 144.66,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "78-93-3",
+    "title": "2-Butanone",
+    "smiles": "CCC(C)=O",
+    "split": "train",
+    "snr": 374.95,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "629-50-5",
+    "title": "Tridecane",
+    "smiles": "CCCCCCCCCCCCC",
+    "split": "train",
+    "snr": 3472.36,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "628-61-5",
+    "title": "2-Chlorooctane",
+    "smiles": "CCCCCCC(C)Cl",
+    "split": "train",
+    "snr": 3283.3,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "79-16-3",
+    "title": "N-Methylacetamide",
+    "smiles": "CN=C(C)O",
+    "split": "train",
+    "snr": 594.47,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "74-84-0",
+    "title": "Ethane",
+    "smiles": "CC",
+    "split": "train",
+    "snr": 1100.32,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-47-0",
+    "title": "Benzonitrile",
+    "smiles": "N#Cc1ccccc1",
+    "split": "train",
+    "snr": 80.7,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "109-66-0",
+    "title": "Pentane",
+    "smiles": "CCCCC",
+    "split": "train",
+    "snr": 4352.88,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "105-42-0",
+    "title": "4-Methyl-2-hexanone",
+    "smiles": "CCC(C)CC(C)=O",
+    "split": "train",
+    "snr": 180.55,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "74-86-2",
+    "title": "Acetylene",
+    "smiles": "C#C",
+    "split": "train",
+    "snr": 4308.47,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "1975-78-6",
+    "title": "n-Decanenitrile",
+    "smiles": "CCCCCCCCCC#N",
+    "split": "train",
+    "snr": 6562.37,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "151-10-0",
+    "title": "1,3-Dimethoxybenzene",
+    "smiles": "COc1cccc(OC)c1",
+    "split": "train",
+    "snr": 257.52,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "98-86-2",
+    "title": "Acetophenone",
+    "smiles": "CC(=O)c1ccccc1",
+    "split": "train",
+    "snr": 231.96,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "124-07-2",
+    "title": "Octanoic Acid",
+    "smiles": "CCCCCCCC(=O)O",
+    "split": "train",
+    "snr": 15.14,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "99-08-1",
+    "title": "Benzene, 1-methyl-3-nitro-",
+    "smiles": "Cc1cccc([N+](=O)[O-])c1",
+    "split": "train",
+    "snr": 341.64,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-26-2",
+    "title": "Hexylamine",
+    "smiles": "CCCCCCN",
+    "split": "train",
+    "snr": 618.1,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "75-09-2",
+    "title": "Methylene Chloride",
+    "smiles": "ClCCl",
+    "split": "train",
+    "snr": 3504.22,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "628-71-7",
+    "title": "1-Heptyne",
+    "smiles": "C#CCCCCC",
+    "split": "train",
+    "snr": 2629.53,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "124-18-5",
+    "title": "Decane",
+    "smiles": "CCCCCCCCCC",
+    "split": "train",
+    "snr": 2633.29,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "98-82-8",
+    "title": "Benzene, (1-methylethyl)-",
+    "smiles": "CC(C)c1ccccc1",
+    "split": "train",
+    "snr": 153.79,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-42-3",
+    "title": "p-Xylene",
+    "smiles": "Cc1ccc(C)cc1",
+    "split": "train",
+    "snr": 60.23,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-84-2",
+    "title": "Nonane",
+    "smiles": "CCCCCCCCC",
+    "split": "train",
+    "snr": 3629.21,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "541-35-5",
+    "title": "n-Butyramide",
+    "smiles": "CCCC(=N)O",
+    "split": "train",
+    "snr": 461.05,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "124-11-8",
+    "title": "1-Nonene",
+    "smiles": "C=CCCCCCCC",
+    "split": "train",
+    "snr": 274.49,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "764-01-2",
+    "title": "2-Butyn-1-ol",
+    "smiles": "CC#CCO",
+    "split": "train",
+    "snr": 239.32,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "79-10-7",
+    "title": "2-Propenoic acid",
+    "smiles": "C=CC(=O)O",
+    "split": "train",
+    "snr": 30.2,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "111-96-6",
+    "title": "Bis(2-methoxyethyl)ether",
+    "smiles": "COCCOCCOC",
+    "split": "train",
+    "snr": 214.07,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "108-67-8",
+    "title": "Benzene, 1,3,5-trimethyl-",
+    "smiles": "Cc1cc(C)cc(C)c1",
+    "split": "train",
+    "snr": 316.66,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "103-84-4",
+    "title": "Acetamide, N-phenyl-",
+    "smiles": "CC(O)=Nc1ccccc1",
+    "split": "train",
+    "snr": 187.43,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "107-12-0",
+    "title": "Propanenitrile",
+    "smiles": "CCC#N",
+    "split": "train",
+    "snr": 491.55,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "142-96-1",
+    "title": "n-Butyl ether",
+    "smiles": "CCCCOCCCC",
+    "split": "train",
+    "snr": 1025.23,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "119-61-9",
+    "title": "Benzophenone",
+    "smiles": "O=C(c1ccccc1)c1ccccc1",
+    "split": "train",
+    "snr": 169.48,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "76-01-7",
+    "title": "Ethane, pentachloro-",
+    "smiles": "ClC(Cl)C(Cl)(Cl)Cl",
+    "split": "train",
+    "snr": 2482.8,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-13-7",
+    "title": "2-Octanone",
+    "smiles": "CCCCCCC(C)=O",
+    "split": "train",
+    "snr": 392.75,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "627-20-3",
+    "title": "cis-2-Pentene",
+    "smiles": "C/C=C\\CC",
+    "split": "train",
+    "snr": 503.3,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "99-09-2",
+    "title": "3-Nitroaniline",
+    "smiles": "Nc1cccc([N+](=O)[O-])c1",
+    "split": "train",
+    "snr": 371.64,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-47-8",
+    "title": "p-Chloroaniline",
+    "smiles": "Nc1ccc(Cl)cc1",
+    "split": "train",
+    "snr": 123.17,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "75-31-0",
+    "title": "2-Propanamine",
+    "smiles": "CC(C)N",
+    "split": "train",
+    "snr": 862.41,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "78-59-1",
+    "title": "2-Cyclohexen-1-one, 3,5,5-trimethyl-",
+    "smiles": "CC1=CC(=O)CC(C)(C)C1",
+    "split": "train",
+    "snr": 343.11,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "112-40-3",
+    "title": "Dodecane",
+    "smiles": "CCCCCCCCCCCC",
+    "split": "train",
+    "snr": 4705.6,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "75-05-8",
+    "title": "Acetonitrile",
+    "smiles": "CC#N",
+    "split": "train",
+    "snr": 106.46,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "75-85-4",
+    "title": "Amylene Hydrate",
+    "smiles": "CCC(C)(C)O",
+    "split": "train",
+    "snr": 872.52,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "95-47-6",
+    "title": "Benzene, 1,2-dimethyl-",
+    "smiles": "Cc1ccccc1C",
+    "split": "train",
+    "snr": 162.57,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "1746-13-0",
+    "title": "Allylphenyl ether",
+    "smiles": "C=CCOc1ccccc1",
+    "split": "train",
+    "snr": 180.39,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "91-16-7",
+    "title": "Benzene, 1,2-dimethoxy-",
+    "smiles": "COc1ccccc1OC",
+    "split": "train",
+    "snr": 343.72,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "78-92-2",
+    "title": "2-Butanol",
+    "smiles": "CCC(C)O",
+    "split": "train",
+    "snr": 1244.83,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "1119-65-9",
+    "title": "2-Heptyne",
+    "smiles": "CC#CCCCC",
+    "split": "train",
+    "snr": 2616.3,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "142-68-7",
+    "title": "2H-Pyran, tetrahydro-",
+    "smiles": "C1CCOCC1",
+    "split": "train",
+    "snr": 588.92,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "619-56-7",
+    "title": "4-Chlorobenzamide",
+    "smiles": "NC(=O)c1ccc(Cl)cc1",
+    "split": "train",
+    "snr": 336.16,
+    "label_consistency": 0.4,
+    "label_suspect": true
+  },
+  {
+    "cas": "78-78-4",
+    "title": "Butane, 2-methyl-",
+    "smiles": "CCC(C)C",
+    "split": "train",
+    "snr": 2154.88,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "107-83-5",
+    "title": "2-Methylpentane",
+    "smiles": "CCCC(C)C",
+    "split": "train",
+    "snr": 2503.78,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "110-62-3",
+    "title": "Pentanal",
+    "smiles": "CCCCC=O",
+    "split": "train",
+    "snr": 86.75,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "3452-09-3",
+    "title": "1-Nonyne",
+    "smiles": "C#CCCCCCCC",
+    "split": "train",
+    "snr": 3735.78,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "106-97-8",
+    "title": "Butane",
+    "smiles": "CCCC",
+    "split": "train",
+    "snr": 3296.51,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "122-78-1",
+    "title": "Phenylethanal",
+    "smiles": "O=CCc1ccccc1",
+    "split": "train",
+    "snr": 78.43,
+    "label_consistency": 0.75,
+    "label_suspect": false
+  },
+  {
+    "cas": "124-19-6",
+    "title": "Nonanal",
+    "smiles": "CCCCCCCCC=O",
+    "split": "train",
+    "snr": 159.81,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "111-87-5",
+    "title": "1-Octanol",
+    "smiles": "CCCCCCCCO",
+    "split": "train",
+    "snr": 4948.57,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "104-76-7",
+    "title": "1-Hexanol, 2-ethyl-",
+    "smiles": "CCCCC(CC)CO",
+    "split": "train",
+    "snr": 2500.52,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "107-10-8",
+    "title": "1-Propanamine",
+    "smiles": "CCCN",
+    "split": "train",
+    "snr": 159.61,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "591-31-1",
+    "title": "Benzaldehyde, 3-methoxy-",
+    "smiles": "COc1cccc(C=O)c1",
+    "split": "train",
+    "snr": 374.79,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "78-83-1",
+    "title": "1-Propanol, 2-methyl-",
+    "smiles": "CC(C)CO",
+    "split": "train",
+    "snr": 2341.49,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-70-6",
+    "title": "1-Heptanol",
+    "smiles": "CCCCCCCO",
+    "split": "train",
+    "snr": 5091.03,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "104-46-1",
+    "title": "Benzene, 1-methoxy-4-(1-propenyl)-",
+    "smiles": "CC=Cc1ccc(OC)cc1",
+    "split": "train",
+    "snr": 284.49,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "97-99-4",
+    "title": "2-Furanmethanol, tetrahydro-",
+    "smiles": "OCC1CCCO1",
+    "split": "train",
+    "snr": 310.79,
+    "label_consistency": 0.75,
+    "label_suspect": false
+  },
+  {
+    "cas": "127-19-5",
+    "title": "Acetamide, N,N-dimethyl-",
+    "smiles": "CC(=O)N(C)C",
+    "split": "train",
+    "snr": 775.59,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "71-41-0",
+    "title": "1-Pentanol",
+    "smiles": "CCCCCO",
+    "split": "train",
+    "snr": 2715.29,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "142-68-7",
+    "title": "2H-Pyran, tetrahydro-",
+    "smiles": "C1CCOCC1",
+    "split": "train",
+    "snr": 588.92,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "693-54-9",
+    "title": "2-Decanone",
+    "smiles": "CCCCCCCCC(C)=O",
+    "split": "train",
+    "snr": 447.25,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "108-88-3",
+    "title": "Toluene",
+    "smiles": "Cc1ccccc1",
+    "split": "train",
+    "snr": 88.27,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "74-99-7",
+    "title": "Propyne",
+    "smiles": "C#CC",
+    "split": "train",
+    "snr": 2178.07,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "100-61-8",
+    "title": "Aniline, N-methyl-",
+    "smiles": "CNc1ccccc1",
+    "split": "train",
+    "snr": 150.56,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "764-93-2",
+    "title": "1-Decyne",
+    "smiles": "C#CCCCCCCCC",
+    "split": "train",
+    "snr": 5739.24,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "67-66-3",
+    "title": "Chloroform",
+    "smiles": "ClC(Cl)Cl",
+    "split": "train",
+    "snr": 6830.63,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "95-63-6",
+    "title": "Benzene, 1,2,4-trimethyl-",
+    "smiles": "Cc1ccc(C)c(C)c1",
+    "split": "train",
+    "snr": 128.97,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "150-78-7",
+    "title": "Benzene, 1,4-dimethoxy-",
+    "smiles": "COc1ccc(OC)cc1",
+    "split": "train",
+    "snr": 387.14,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "135-98-8",
+    "title": "Benzene, (1-methylpropyl)-",
+    "smiles": "CCC(C)c1ccccc1",
+    "split": "train",
+    "snr": 162.91,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "108-86-1",
+    "title": "Benzene, bromo-",
+    "smiles": "Brc1ccccc1",
+    "split": "train",
+    "snr": 93.8,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "91-20-3",
+    "title": "Naphthalene",
+    "smiles": "c1ccc2ccccc2c1",
+    "split": "train",
+    "snr": 99.87,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "627-21-4",
+    "title": "2-Pentyne",
+    "smiles": "CC#CCC",
+    "split": "train",
+    "snr": 644.14,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "109-52-4",
+    "title": "Pentanoic acid",
+    "smiles": "CCCCC(=O)O",
+    "split": "train",
+    "snr": 13.24,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "68-12-2",
+    "title": "Formamide, N,N-dimethyl-",
+    "smiles": "CN(C)C=O",
+    "split": "train",
+    "snr": 762.16,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "112-30-1",
+    "title": "1-Decanol",
+    "smiles": "CCCCCCCCCCO",
+    "split": "train",
+    "snr": 3992.65,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "55-21-0",
+    "title": "Benzamide",
+    "smiles": "N=C(O)c1ccccc1",
+    "split": "train",
+    "snr": 254.34,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "555-16-8",
+    "title": "p-Nitrobenzaldehyde",
+    "smiles": "O=Cc1ccc([N+](=O)[O-])cc1",
+    "split": "train",
+    "snr": 665.4,
+    "label_consistency": 0.75,
+    "label_suspect": false
+  },
+  {
+    "cas": "103-65-1",
+    "title": "Benzene, propyl-",
+    "smiles": "CCCc1ccccc1",
+    "split": "train",
+    "snr": 98.8,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "591-78-6",
+    "title": "2-Hexanone",
+    "smiles": "CCCCC(C)=O",
+    "split": "train",
+    "snr": 97.75,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-69-3",
+    "title": "Hexanedinitrile",
+    "smiles": "N#CCCCCC#N",
+    "split": "train",
+    "snr": 770.23,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "112-20-9",
+    "title": "N-Nonylamine",
+    "smiles": "CCCCCCCCCN",
+    "split": "train",
+    "snr": 1207.31,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "112-49-2",
+    "title": "2,5,8,11-Tetraoxadodecane",
+    "smiles": "COCCOCCOCCOC",
+    "split": "train",
+    "snr": 236.59,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "108-11-2",
+    "title": "2-Pentanol, 4-methyl-",
+    "smiles": "CC(C)CC(C)O",
+    "split": "train",
+    "snr": 771.92,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "120-57-0",
+    "title": "3,4-Methylenedioxybenzaldehyde",
+    "smiles": "O=Cc1ccc2c(c1)OCO2",
+    "split": "train",
+    "snr": 284.29,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "102-77-2",
+    "title": "Morpholine, 4-(2-benzothiazolylthio)-",
+    "smiles": "c1ccc2sc(SN3CCOCC3)nc2c1",
+    "split": "train",
+    "snr": 560.34,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-35-4",
+    "title": "3-Heptanone",
+    "smiles": "CCCCC(=O)CC",
+    "split": "train",
+    "snr": 230.92,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "625-77-4",
+    "title": "Diacetamide",
+    "smiles": "CC(=O)N=C(C)O",
+    "split": "train",
+    "snr": 204.58,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "693-65-2",
+    "title": "Pentane, 1,1'-oxybis-",
+    "smiles": "CCCCCOCCCCC",
+    "split": "train",
+    "snr": 1591.3,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "103-09-3",
+    "title": "Acetic acid, 2-ethylhexyl ester",
+    "smiles": "CCCCC(CC)COC(C)=O",
+    "split": "train",
+    "snr": 114.43,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "108-93-0",
+    "title": "Cyclohexanol",
+    "smiles": "OC1CCCCC1",
+    "split": "train",
+    "snr": 2285.21,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "873-74-5",
+    "title": "p-Aminobenzonitrile",
+    "smiles": "N#Cc1ccc(N)cc1",
+    "split": "train",
+    "snr": 163.91,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "928-49-4",
+    "title": "3-Hexyne",
+    "smiles": "CCC#CCC",
+    "split": "train",
+    "snr": 622.69,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "821-55-6",
+    "title": "2-Nonanone",
+    "smiles": "CCCCCCCC(C)=O",
+    "split": "train",
+    "snr": 224.91,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "91-66-7",
+    "title": "Benzenamine, N,N-diethyl-",
+    "smiles": "CCN(CC)c1ccccc1",
+    "split": "train",
+    "snr": 193.58,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "79-00-5",
+    "title": "Ethane, 1,1,2-trichloro-",
+    "smiles": "ClCC(Cl)Cl",
+    "split": "train",
+    "snr": 3034.65,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "120-50-3",
+    "title": "Benzoic acid, 2-methylpropyl ester",
+    "smiles": "CC(C)COC(=O)c1ccccc1",
+    "split": "train",
+    "snr": 305.74,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "142-92-7",
+    "title": "Acetic acid, hexyl ester",
+    "smiles": "CCCCCCOC(C)=O",
+    "split": "train",
+    "snr": 84.29,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "541-73-1",
+    "title": "Benzene, 1,3-dichloro-",
+    "smiles": "Clc1cccc(Cl)c1",
+    "split": "train",
+    "snr": 208.85,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "109-73-9",
+    "title": "n-Butylamine",
+    "smiles": "CCCCN",
+    "split": "train",
+    "snr": 365.23,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "77-92-9",
+    "title": "1,2,3-PROPANETRICARBOXYLIC ACID ,2-HYDROXY-",
+    "smiles": "O=C(O)CC(O)(CC(=O)O)C(=O)O",
+    "split": "train",
+    "snr": 32.54,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "592-41-6",
+    "title": "1-Hexene",
+    "smiles": "C=CCCCC",
+    "split": "train",
+    "snr": 125.21,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "120-82-1",
+    "title": "Benzene, 1,2,4-trichloro-",
+    "smiles": "Clc1ccc(Cl)c(Cl)c1",
+    "split": "train",
+    "snr": 266.1,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "110-61-2",
+    "title": "1,4-BUTANEDINITRILE",
+    "smiles": "N#CCCC#N",
+    "split": "train",
+    "snr": 284.71,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "110-38-3",
+    "title": "Decanoic acid, ethyl ester",
+    "smiles": "CCCCCCCCCC(=O)OCC",
+    "split": "train",
+    "snr": 187.74,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "64-17-5",
+    "title": "Ethanol",
+    "smiles": "CCO",
+    "split": "train",
+    "snr": 156.7,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "76-06-2",
+    "title": "Methane, trichloronitro-",
+    "smiles": "O=[N+]([O-])C(Cl)(Cl)Cl",
+    "split": "train",
+    "snr": 72.76,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "107-92-6",
+    "title": "Butanoic acid",
+    "smiles": "CCCC(=O)O",
+    "split": "train",
+    "snr": 10.35,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "100-80-1",
+    "title": "3-Methylstyrene",
+    "smiles": "C=Cc1cccc(C)c1",
+    "split": "train",
+    "snr": 22.02,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "464-07-3",
+    "title": "2-Butanol, 3,3-dimethyl-",
+    "smiles": "CC(O)C(C)(C)C",
+    "split": "train",
+    "snr": 2402.59,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-46-9",
+    "title": "Benzylamine",
+    "smiles": "NCc1ccccc1",
+    "split": "train",
+    "snr": 97.37,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "107-00-6",
+    "title": "1-Butyne",
+    "smiles": "C#CCC",
+    "split": "train",
+    "snr": 1723.9,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "112-31-2",
+    "title": "Decanal",
+    "smiles": "CCCCCCCCCC=O",
+    "split": "train",
+    "snr": 161.95,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "74-98-6",
+    "title": "Propane",
+    "smiles": "CCC",
+    "split": "train",
+    "snr": 2482.29,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "124-13-0",
+    "title": "Octanal",
+    "smiles": "CCCCCCCC=O",
+    "split": "train",
+    "snr": 111.47,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "103-69-5",
+    "title": "Benzenamine, N-ethyl-",
+    "smiles": "CCNc1ccccc1",
+    "split": "train",
+    "snr": 173.34,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-51-6",
+    "title": "Benzylalcohol",
+    "smiles": "OCc1ccccc1",
+    "split": "train",
+    "snr": 91.09,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "142-82-5",
+    "title": "Heptane",
+    "smiles": "CCCCCCC",
+    "split": "train",
+    "snr": 3480.27,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "79-20-9",
+    "title": "Acetic acid, methyl ester",
+    "smiles": "COC(C)=O",
+    "split": "train",
+    "snr": 52.49,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "628-63-7",
+    "title": "Acetic acid, pentyl ester",
+    "smiles": "CCCCCOC(C)=O",
+    "split": "train",
+    "snr": 131.81,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "105-37-3",
+    "title": "Propanoic acid, ethyl ester",
+    "smiles": "CCOC(=O)CC",
+    "split": "train",
+    "snr": 138.28,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-98-9",
+    "title": "1-Butene",
+    "smiles": "C=CCC",
+    "split": "val",
+    "snr": 76.18,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "112-05-0",
+    "title": "Nonanoic acid",
+    "smiles": "CCCCCCCCC(=O)O",
+    "split": "val",
+    "snr": 15.68,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "121-69-7",
+    "title": "Benzenamine, N,N-dimethyl-",
+    "smiles": "CN(C)c1ccccc1",
+    "split": "val",
+    "snr": 114.45,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "502-56-7",
+    "title": "5-Nonanone",
+    "smiles": "CCCCC(=O)CCCC",
+    "split": "val",
+    "snr": 375.47,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "111-14-8",
+    "title": "Heptanoic acid",
+    "smiles": "CCCCCCC(=O)O",
+    "split": "val",
+    "snr": 14.76,
+    "label_consistency": 0.25,
+    "label_suspect": true
+  },
+  {
+    "cas": "111-27-3",
+    "title": "1-Hexanol",
+    "smiles": "CCCCCCO",
+    "split": "val",
+    "snr": 3543.46,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "110-54-3",
+    "title": "Hexane",
+    "smiles": "CCCCCC",
+    "split": "val",
+    "snr": 2943.54,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "110-71-4",
+    "title": "1,2-Dimethoxyethane",
+    "smiles": "COCCOC",
+    "split": "val",
+    "snr": 225.87,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "71-23-8",
+    "title": "1-Propanol",
+    "smiles": "CCCO",
+    "split": "val",
+    "snr": 760.32,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "115-07-1",
+    "title": "Propene",
+    "smiles": "C=CC",
+    "split": "val",
+    "snr": 45.73,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "90-02-8",
+    "title": "Benzaldehyde, 2-hydroxy-",
+    "smiles": "O=Cc1ccccc1O",
+    "split": "val",
+    "snr": 584.07,
+    "label_consistency": 0.4,
+    "label_suspect": true
+  },
+  {
+    "cas": "36653-82-4",
+    "title": "1-Hexadecanol",
+    "smiles": "CCCCCCCCCCCCCCCCO",
+    "split": "val",
+    "snr": 2158.06,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "98-06-6",
+    "title": "Benzene, tert-butyl-",
+    "smiles": "CC(C)(C)c1ccccc1",
+    "split": "val",
+    "snr": 214.34,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "62-53-3",
+    "title": "Aniline",
+    "smiles": "Nc1ccccc1",
+    "split": "val",
+    "snr": 89.34,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "87-61-6",
+    "title": "Benzene, 1,2,3-trichloro-",
+    "smiles": "Clc1cccc(Cl)c1Cl",
+    "split": "val",
+    "snr": 108.86,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "536-74-3",
+    "title": "Phenylethyne",
+    "smiles": "C#Cc1ccccc1",
+    "split": "val",
+    "snr": 84.83,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "79-41-4",
+    "title": "2-Propenoic acid, 2-methyl-",
+    "smiles": "C=C(C)C(=O)O",
+    "split": "val",
+    "snr": 72.64,
+    "label_consistency": 0.2,
+    "label_suspect": true
+  },
+  {
+    "cas": "693-02-7",
+    "title": "1-Hexyne",
+    "smiles": "C#CCCCC",
+    "split": "val",
+    "snr": 3505.08,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "110-43-0",
+    "title": "2-Heptanone",
+    "smiles": "CCCCCC(C)=O",
+    "split": "val",
+    "snr": 216.81,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "56-23-5",
+    "title": "Carbon Tetrachloride",
+    "smiles": "ClC(Cl)(Cl)Cl",
+    "split": "val",
+    "snr": 9945.98,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "104-51-8",
+    "title": "Benzene, butyl-",
+    "smiles": "CCCCc1ccccc1",
+    "split": "val",
+    "snr": 137.6,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "104-45-0",
+    "title": "4-Propylanisole",
+    "smiles": "CCCc1ccc(OC)cc1",
+    "split": "val",
+    "snr": 326.92,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "1120-21-4",
+    "title": "Undecane",
+    "smiles": "CCCCCCCCCCC",
+    "split": "val",
+    "snr": 4810.88,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-66-0",
+    "title": "1-Octene",
+    "smiles": "C=CCCCCCC",
+    "split": "val",
+    "snr": 434.03,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "629-59-4",
+    "title": "Tetradecane",
+    "smiles": "CCCCCCCCCCCCCC",
+    "split": "test",
+    "snr": 7000.98,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "95-50-1",
+    "title": "Benzene, 1,2-dichloro-",
+    "smiles": "Clc1ccccc1Cl",
+    "split": "test",
+    "snr": 162.31,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "67-63-0",
+    "title": "Isopropyl Alcohol",
+    "smiles": "CC(C)O",
+    "split": "test",
+    "snr": 748.35,
+    "label_consistency": 0.667,
+    "label_suspect": false
+  },
+  {
+    "cas": "96-14-0",
+    "title": "Pentane, 3-methyl-",
+    "smiles": "CCC(C)CC",
+    "split": "test",
+    "snr": 4244.21,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "96-22-0",
+    "title": "3-Pentanone",
+    "smiles": "CCC(=O)CC",
+    "split": "test",
+    "snr": 231.67,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "67-64-1",
+    "title": "Acetone",
+    "smiles": "CC(C)=O",
+    "split": "test",
+    "snr": 64.09,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-30-9",
+    "title": "Heptanoic acid, ethyl ester",
+    "smiles": "CCCCCCC(=O)OCC",
+    "split": "test",
+    "snr": 161.02,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "108-10-1",
+    "title": "Methyl Isobutyl Ketone",
+    "smiles": "CC(=O)CC(C)C",
+    "split": "test",
+    "snr": 163.39,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "74-85-1",
+    "title": "ETHYLENE",
+    "smiles": "C=C",
+    "split": "test",
+    "snr": 123.77,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "75-34-3",
+    "title": "Ethane, 1,1-dichloro-",
+    "smiles": "CC(Cl)Cl",
+    "split": "test",
+    "snr": 1692.72,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "100-47-0",
+    "title": "Benzonitrile",
+    "smiles": "N#Cc1ccccc1",
+    "split": "test",
+    "snr": 80.7,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "123-66-0",
+    "title": "Hexanoic acid, ethyl ester",
+    "smiles": "CCCCCC(=O)OCC",
+    "split": "test",
+    "snr": 148.66,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "98-85-1",
+    "title": "Benzenemethanol, .alpha.-methyl-",
+    "smiles": "CC(O)c1ccccc1",
+    "split": "test",
+    "snr": 67.72,
+    "label_consistency": 0.75,
+    "label_suspect": false
+  },
+  {
+    "cas": "106-93-4",
+    "title": "Ethane, 1,2-dibromo-",
+    "smiles": "BrCCBr",
+    "split": "test",
+    "snr": 999.26,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-86-4",
+    "title": "1-Octanamine",
+    "smiles": "CCCCCCCCN",
+    "split": "test",
+    "snr": 1092.83,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "141-78-6",
+    "title": "Ethyl Acetate",
+    "smiles": "CCOC(C)=O",
+    "split": "test",
+    "snr": 153.44,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "112-53-8",
+    "title": "1-Dodecanol",
+    "smiles": "CCCCCCCCCCCCO",
+    "split": "test",
+    "snr": 3047.2,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "2243-27-8",
+    "title": "Nonanenitrile",
+    "smiles": "CCCCCCCCC#N",
+    "split": "test",
+    "snr": 3305.25,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "75-04-7",
+    "title": "Ethylamine",
+    "smiles": "CCN",
+    "split": "test",
+    "snr": 377.46,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "872-05-9",
+    "title": "1-Decene",
+    "smiles": "C=CCCCCCCCC",
+    "split": "test",
+    "snr": 307.19,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  },
+  {
+    "cas": "60-12-8",
+    "title": "Phenethyl alcohol",
+    "smiles": "OCCc1ccccc1",
+    "split": "test",
+    "snr": 108.58,
+    "label_consistency": 0.333,
+    "label_suspect": true
+  },
+  {
+    "cas": "106-46-7",
+    "title": "Benzene, 1,4-dichloro-",
+    "smiles": "Clc1ccc(Cl)cc1",
+    "split": "test",
+    "snr": 128.84,
+    "label_consistency": 0.5,
+    "label_suspect": false
+  },
+  {
+    "cas": "98-83-9",
+    "title": ".alpha.-Methylstyrene",
+    "smiles": "C=C(C)c1ccccc1",
+    "split": "test",
+    "snr": 45.84,
+    "label_consistency": 1.0,
+    "label_suspect": false
+  },
+  {
+    "cas": "111-68-2",
+    "title": "1-Heptylamine",
+    "smiles": "CCCCCCCN",
+    "split": "test",
+    "snr": 830.03,
+    "label_consistency": 0.0,
+    "label_suspect": true
+  }
+]
