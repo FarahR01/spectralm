@@ -53,7 +53,7 @@ from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
-from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.responses import RedirectResponse, HTMLResponse, Response
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -64,9 +64,6 @@ from spectralm.physics.beer_lambert import BeerLambertConstraint
 from spectralm.physics.group_frequencies import (
     GroupFrequencyChecker, GROUP_FREQUENCY_TABLE, WAVENUMBER_AXIS
 )
-# Serve the static folder
-from fastapi.staticfiles import StaticFiles
-
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
@@ -350,6 +347,36 @@ class ModelInfoResponse(BaseModel):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# View and utility helpers
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _load_view_file(view_name: str, filename: str) -> str:
+    """Load a view file (HTML, CSS, JS) from the views folder."""
+    view_path = Path(__file__).parent.parent / "views" / view_name / filename
+    if not view_path.exists():
+        raise FileNotFoundError(f"View file not found: {view_path}")
+    return view_path.read_text(encoding="utf-8")
+
+
+def _format_uptime(seconds: float) -> str:
+    """Format uptime in human-readable format."""
+    if seconds < 60:
+        return f"{int(seconds)}s"
+    elif seconds < 3600:
+        return f"{int(seconds // 60)}m {int(seconds % 60)}s"
+    else:
+        hours = int(seconds // 3600)
+        minutes = int((seconds % 3600) // 60)
+        return f"{hours}h {minutes}m"
+
+
+def _get_current_time() -> str:
+    """Get current time in ISO format."""
+    from datetime import datetime
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # Inference helpers
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -550,9 +577,10 @@ def require_model():
 # ══════════════════════════════════════════════════════════════════════════════
 # Endpoints
 # ══════════════════════════════════════════════════════════════════════════════
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def root():
+    """Serve the home/landing page dashboard."""
     model_ready = state.model is not None
     status_color = "#1D9E75" if model_ready else "#E24B4A"
     status_text  = "online" if model_ready else "not loaded"
@@ -561,81 +589,92 @@ async def root():
     params = f"{state.model.num_parameters:,}" if model_ready else "—"
     uptime = f"{(time.time() - state.server_start_time):.0f}s" if state.server_start_time else "—"
 
-    html = Path("static/index.html").read_text(encoding="utf-8")
-
-    html = html.replace("{status_text}",       status_text)
-    html = html.replace("{status_color}",      status_color)
-
-    html = html.replace("{uptime}",            uptime)
-    html = html.replace("{ecr}",               ecr)
-    html = html.replace("{epoch}",             str(epoch))
-    html = html.replace("{params}",            params)
-    html = html.replace("{state.request_count}", str(state.request_count))
-    html = html.replace(
-        '<link rel="stylesheet" href="./style.css">',
-        '<link rel="stylesheet" href="/static/style.css">'
-    )
-
-    return HTMLResponse(html)
+    try:
+        html = _load_view_file("home", "index.html")
+        html = html.replace("{status_text}",       status_text)
+        html = html.replace("{status_color}",      status_color)
+        html = html.replace("{uptime}",            uptime)
+        html = html.replace("{ecr}",               ecr)
+        html = html.replace("{epoch}",             str(epoch))
+        html = html.replace("{params}",            params)
+        html = html.replace("{state.request_count}", str(state.request_count))
+        return HTMLResponse(html)
+    except FileNotFoundError as e:
+        log.error(f"Failed to load home view: {e}")
+        raise HTTPException(status_code=500, detail="Home view not found")
 
 @app.get(
     "/health",
-    response_model=HealthResponse,
     summary="Server and model health check",
     tags=["Infrastructure"],
 )
-async def health():
+async def health(request: Request):
     """
-    Returns server status, model load state, and request statistics.
-    Use this for load balancer health checks and monitoring.
+    Returns server status in HTML (browser) or JSON (API) format.
+    Content negotiation based on Accept header:
+    - Accepts: application/json → Returns JSON
+    - Accepts: text/html → Returns interactive HTML dashboard
     """
     uptime = time.time() - state.server_start_time if state.server_start_time else 0.0
     n      = state.request_count
     errors = state.error_count
-    return HealthResponse(
-        status="ok" if state.model is not None else "degraded",
-        model_loaded=state.model is not None,
-        device=str(state.device),
-        checkpoint=state.checkpoint_path,
-        loaded_epoch=state.loaded_epoch,
-        val_ecr=state.val_ecr,
-        uptime_sec=round(uptime, 1),
-        requests_served=n,
-        error_count=errors,
-        error_rate=round(errors / max(n, 1), 4),
-    )
+    
+    # Content negotiation: return HTML for browsers, JSON for API clients
+    accept = request.headers.get("accept", "")
+    
+    # Prefer HTML for browsers (they send Accept: text/html)
+    # Prefer JSON only if explicitly requested or no text/html in Accept header
+    if "text/html" in accept:
+        # Browser request — return HTML dashboard
+        try:
+            html = _load_view_file("health", "index.html")
+            return HTMLResponse(html)
+        except FileNotFoundError as e:
+            log.error(f"Failed to load health view: {e}")
+            raise HTTPException(status_code=500, detail="Health view not found")
+    else:
+        # API request — return JSON
+        return JSONResponse({
+            "status": "ok" if state.model is not None else "degraded",
+            "model_loaded": state.model is not None,
+            "device": str(state.device),
+            "checkpoint": state.checkpoint_path,
+            "loaded_epoch": state.loaded_epoch,
+            "val_ecr": state.val_ecr,
+            "uptime_sec": round(uptime, 1),
+            "requests_served": n,
+            "error_count": errors,
+            "error_rate": round(errors / max(n, 1), 4),
+        })
 
 
 @app.get(
     "/model/info",
-    response_model=ModelInfoResponse,
     summary="Model card metadata",
     tags=["Infrastructure"],
 )
-async def model_info(_: None = Depends(require_model)):
+async def model_info(request: Request, _: None = Depends(require_model)):
     """
     Returns the model card: architecture, training details,
     physics constraint configuration, and known limitations.
+    Content negotiation: HTML for browsers, JSON for API clients.
     """
     cfg = state.config
-    return ModelInfoResponse(
-        model_name="SpectraLM",
-        version="0.3.0",
-        num_parameters=state.model.num_parameters,
-        architecture={
-            "encoder":     "1D-CNN (4 layers) + Wavenumber Positional Encoding",
-            "transformer": f"Encoder-Decoder, "
-                           f"d_model={cfg.transformer.d_model}, "
-                           f"nhead={cfg.transformer.nhead}, "
-                           f"enc_layers={cfg.transformer.num_encoder_layers}, "
-                           f"dec_layers={cfg.transformer.num_decoder_layers}",
+    
+    model_data = {
+        "model_name": "SpectraLM",
+        "version": "0.3.0",
+        "num_parameters": state.model.num_parameters,
+        "architecture": {
+            "encoder": "1D-CNN (4 layers) + Wavenumber Positional Encoding",
+            "transformer": f"Encoder-Decoder, d_model={cfg.transformer.d_model}, nhead={cfg.transformer.nhead}, enc_layers={cfg.transformer.num_encoder_layers}, dec_layers={cfg.transformer.num_decoder_layers}",
             "physics_head": "Lorentzian peak model (learnable centres + widths)",
-            "d_model":     cfg.transformer.d_model,
-            "vocab_size":  cfg.transformer.vocab_size,
+            "d_model": cfg.transformer.d_model,
+            "vocab_size": cfg.transformer.vocab_size,
         },
-        physics_constraints={
-            "beer_lambert_weight":  cfg.lambda_beer_lambert,
-            "group_freq_weight":    cfg.lambda_group_freq,
+        "physics_constraints": {
+            "beer_lambert_weight": cfg.lambda_beer_lambert,
+            "group_freq_weight": cfg.lambda_group_freq,
             "implausibility_threshold": cfg.implausibility_threshold,
             "constraint_description": (
                 "Beer–Lambert ECR + Group Frequency penalty enforced during training. "
@@ -643,26 +682,26 @@ async def model_info(_: None = Depends(require_model)):
                 "according to A(ν) = ε(ν)·c·l."
             ),
         },
-        training_info={
+        "training_info": {
             "checkpoint_epoch": state.loaded_epoch,
-            "val_ecr":          state.val_ecr,
-            "dataset":          "NIST WebBook IR + MoNA (~12,000 compounds)",
-            "training_script":  "scripts/train.py",
+            "val_ecr": state.val_ecr,
+            "dataset": "NIST WebBook IR + MoNA (~12,000 compounds)",
+            "training_script": "scripts/train.py",
         },
-        input_format={
+        "input_format": {
             "spectrum_length": 1800,
             "wavenumber_range": "400–4000 cm⁻¹",
-            "resolution":       "2 cm⁻¹",
-            "normalisation":    "Scale so max absorbance = 1.0",
-            "units":            "Absorbance (not transmittance)",
+            "resolution": "2 cm⁻¹",
+            "normalisation": "Scale so max absorbance = 1.0",
+            "units": "Absorbance (not transmittance)",
         },
-        output_format={
-            "smiles":          "Canonical SMILES string",
-            "ecr":             "Float, lower is better, implausible > 0.25",
+        "output_format": {
+            "smiles": "Canonical SMILES string",
+            "ecr": "Float, lower is better, implausible > 0.25",
             "confidence_tier": "high / medium / low / implausible",
-            "gf_recall":       "Float 0–1, fraction of expected group absorptions present",
+            "gf_recall": "Float 0–1, fraction of expected group absorptions present",
         },
-        known_limitations=[
+        "known_limitations": [
             "Fails on Nujol-mulled spectra in the 2850–2960 cm⁻¹ region (41% of failures)",
             "Regioisomer confusion: cannot distinguish ortho/meta/para from IR alone (33%)",
             "Poor generalisation to molecular scaffolds with <5 training examples (19%)",
@@ -670,7 +709,21 @@ async def model_info(_: None = Depends(require_model)):
             "Beam search currently supports batch_size=1 only",
             "Not validated on inorganic or organometallic compounds",
         ],
-    )
+    }
+    
+    # Content negotiation: return HTML for browsers, JSON for API clients
+    accept = request.headers.get("accept", "")
+    if "text/html" in accept:
+        # Browser request — return HTML dashboard
+        try:
+            html = _load_view_file("model-info", "index.html")
+            return HTMLResponse(html)
+        except FileNotFoundError as e:
+            log.error(f"Failed to load model-info view: {e}")
+            raise HTTPException(status_code=500, detail="Model info view not found")
+    else:
+        # API request — return JSON
+        return JSONResponse(model_data)
 
 
 @app.post(
@@ -841,6 +894,30 @@ async def analyse_smiles(
     except Exception as e:
         state.error_count += 1
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# View asset endpoints
+# ══════════════════════════════════════════════════════════════════════════════
+
+@app.get("/views/{view_name}/style.css", response_class=Response, include_in_schema=False)
+async def serve_view_css(view_name: str):
+    """Serve CSS for a specific view."""
+    try:
+        css = _load_view_file(view_name, "style.css")
+        return Response(css, media_type="text/css")
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail=f"View {view_name} not found")
+
+
+@app.get("/views/{view_name}/main.js", response_class=Response, include_in_schema=False)
+async def serve_view_js(view_name: str):
+    """Serve JavaScript for a specific view."""
+    try:
+        js = _load_view_file(view_name, "main.js")
+        return Response(js, media_type="text/javascript")
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail=f"View {view_name} not found")
 
 
 # ══════════════════════════════════════════════════════════════════════════════

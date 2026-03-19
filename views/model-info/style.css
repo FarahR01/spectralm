@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #faf8f5;
+    color: #3a3733;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: linear-gradient(135deg, #5b8e7d 0%, #6b8fb2 100%);
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+    width: 100%;
+}
+
+.navbar-brand .brand-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.3em;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.navbar-brand .brand-link:hover {
+    opacity: 0.8;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid white;
+}
+
+.nav-external {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-external:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    background: linear-gradient(135deg, #5b8e7d 0%, #6b8fb2 100%);
+    padding: 40px;
+    color: white;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.header p {
+    font-size: 1.1em;
+    opacity: 0.95;
+}
+
+.content {
+    padding: 40px;
+}
+
+.card-section {
+    margin-bottom: 35px;
+    padding: 25px;
+    background: #f5f3f0;
+    border-radius: 8px;
+    border-left: 4px solid #5b8e7d;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #2d2b28;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.overview-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.85em;
+    color: #7a7470;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.value {
+    font-size: 1.25em;
+    font-weight: 500;
+    color: #2d2b28;
+    font-family: 'Courier New', monospace;
+}
+
+.architecture-details,
+.physics-details,
+.training-details,
+.format-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.detail-card {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e8e4dd;
+}
+
+.detail-card-title {
+    font-weight: 600;
+    color: #5b8e7d;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.detail-card-value {
+    color: #3a3733;
+    font-size: 0.9em;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.physics-section {
+    border-left-color: #7a9b8c;
+    background: #f9f7f4;
+}
+
+.physics-section .detail-card-title {
+    color: #7a9b8c;
+}
+
+.limitations-section {
+    border-left-color: #b8956a;
+}
+
+.limitations-list {
+    list-style: none;
+    padding: 0;
+}
+
+.limitations-list li {
+    padding: 12px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #3a3733;
+    line-height: 1.6;
+    border-bottom: 1px solid #e8e4dd;
+}
+
+.limitations-list li:last-child {
+    border-bottom: none;
+}
+
+.limitations-list li:before {
+    content: "⚠ ";
+    position: absolute;
+    left: 0;
+    color: #b8956a;
+    font-weight: bold;
+}
+
+.footer {
+    background: #f9f7f4;
+    padding: 25px 40px;
+    text-align: center;
+    border-top: 1px solid #e8e4dd;
+}
+
+.footer-text {
+    color: #9a9390;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.last-updated {
+    color: #9a9390;
+    font-size: 0.85em;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .header {
+        padding: 30px 20px;
+    }
+
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .card-section {
+        padding: 15px;
+    }
+
+    .overview-grid,
+    .architecture-details,
+    .physics-details,
+    .training-details,
+    .format-details {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding: 15px 20px;
+    }
+}
+
+/* Loading state */
+.loading {
+    color: #9a9390;
+    font-style: italic;
+    padding: 20px;
+    text-align: center;
+}

@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: #0f0f0d;
+    color: #e8e6df;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card {
+    background: #1a1a18;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    max-width: 560px;
+    width: 100%;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    font-size: 0.82rem;
+    color: #888780;
+    line-height: 1.6;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2rem;
+}
+.status-dot {
+    background: #1D9E75;   /* ← hardcode, server injects correct colour via HTML */
+}
+.status-label {
+    color: #1D9E75;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.metric {
+    background: #111110;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+}
+
+.metric-label {
+    font-size: 0.72rem;
+    color: #5f5e5a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.metric-val {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-family: 'Courier New', monospace;
+    color: #e8e6df;
+}
+
+.metric-val.good {
+    color: #5DCAA5;
+}
+
+.divider {
+    border: none;
+    border-top: 0.5px solid #2c2c2a;
+    margin-bottom: 1.5rem;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    background: #111110;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #e8e6df;
+    font-size: 0.85rem;
+    transition: border-color 0.15s;
+}
+
+.link-row:hover {
+    border-color: #1D9E75;
+}
+
+.link-method {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #1D9E75;
+    color: #04342C;
+    font-weight: 600;
+}
+
+.link-method.get {
+    background: #0C447C;
+    color: #B5D4F4;
+}
+
+.link-method.post {
+    background: #085041;
+    color: #9FE1CB;
+}
+
+.link-arrow {
+    color: #5f5e5a;
+    font-size: 0.8rem;
+}
+
+.footer {
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: #444441;
+    text-align: center;
+}

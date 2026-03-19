@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: linear-gradient(135deg, #5b8e7d 0%, #6b8fb2 100%);
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+}
+
+.navbar-brand .brand-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.3em;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.navbar-brand .brand-link:hover {
+    opacity: 0.8;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid white;
+}
+
+.nav-external {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-external:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: #faf8f5;
+    color: #3a3733;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e8e4dd;
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    margin: 20px auto;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    color: #2d2b28;
+}
+
+.subtitle {
+    font-size: 0.82rem;
+    color: #6b6963;
+    line-height: 1.6;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2rem;
+}
+
+.status-dot {
+    background: #5b8e7d;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.status-label {
+    color: #5b8e7d;
+    font-weight: 500;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.metric {
+    background: #f5f3f0;
+    border: 1px solid #e8e4dd;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+}
+
+.metric-label {
+    font-size: 0.72rem;
+    color: #7a7470;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.metric-val {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-family: 'Courier New', monospace;
+    color: #2d2b28;
+}
+
+.metric-val.good {
+    color: #5b8e7d;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #e8e4dd;
+    margin-bottom: 1.5rem;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    background: #f5f3f0;
+    border: 1px solid #e8e4dd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #3a3733;
+    font-size: 0.85rem;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+
+.link-row:hover {
+    border-color: #5b8e7d;
+    background-color: #f9f7f4;
+}
+
+.link-method {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.link-method.get {
+    background: #6b8fb2;
+    color: #ffffff;
+}
+
+.link-method.post {
+    background: #7a9b8c;
+    color: #ffffff;
+}
+
+.link-arrow {
+    color: #7a7470;
+    font-size: 0.8rem;
+}
+
+.footer {
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: #9a9390;
+    text-align: center;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpectraLM - Model Card</title>
+    <link rel="stylesheet" href="/views/model-info/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">
+          <a href="/" class="brand-link">🔬 SpectraLM</a>
+        </div>
+        <ul class="navbar-menu">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/health" class="nav-link">Health</a></li>
+          <li><a href="/model/info" class="nav-link active">Model Card</a></li>
+          <li><a href="/docs" class="nav-link nav-external" target="_blank">API Docs</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🧬 SpectraLM</h1>
+            <p>Model Card & Technical Specifications</p>
+        </div>
+
+        <div class="content">
+            <!-- Overview Section -->
+            <section class="card-section">
+                <h2 class="section-header">📋 Overview</h2>
+                <div class="overview-grid">
+                    <div class="overview-item">
+                        <span class="label">Model Name</span>
+                        <span class="value" id="model-name">—</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="label">Version</span>
+                        <span class="value" id="model-version">—</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="label">Parameters</span>
+                        <span class="value" id="num-parameters">—</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section class="card-section">
+                <h2 class="section-header">🏗️ Architecture</h2>
+                <div class="architecture-details" id="architecture"></div>
+            </section>
+
+            <!-- Physics Constraints Section -->
+            <section class="card-section physics-section">
+                <h2 class="section-header">⚛️ Physics Constraints</h2>
+                <div class="physics-details" id="physics-constraints"></div>
+            </section>
+
+            <!-- Training Info Section -->
+            <section class="card-section">
+                <h2 class="section-header">🎓 Training Information</h2>
+                <div class="training-details" id="training-info"></div>
+            </section>
+
+            <!-- Input Format Section -->
+            <section class="card-section">
+                <h2 class="section-header">📥 Input Format</h2>
+                <div class="format-details" id="input-format"></div>
+            </section>
+
+            <!-- Output Format Section -->
+            <section class="card-section">
+                <h2 class="section-header">📤 Output Format</h2>
+                <div class="format-details" id="output-format"></div>
+            </section>
+
+            <!-- Known Limitations Section -->
+            <section class="card-section limitations-section">
+                <h2 class="section-header">⚠️ Known Limitations</h2>
+                <ul class="limitations-list" id="limitations"></ul>
+            </section>
+        </div>
+
+        <div class="footer">
+            <div class="footer-text">View API docs at <strong>/docs</strong> | Home at <strong>/</strong> | Health at <strong>/health</strong></div>
+            <div class="last-updated" id="last-updated">Loaded: —</div>
+        </div>
+    </div>
+
+    <script src="/views/model-info/main.js"></script>
+</body>
+</html>

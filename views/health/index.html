@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpectraLM - Health Status</title>
+    <link rel="stylesheet" href="/views/health/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">
+          <a href="/" class="brand-link">🔬 SpectraLM</a>
+        </div>
+        <ul class="navbar-menu">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/health" class="nav-link active">Health</a></li>
+          <li><a href="/model/info" class="nav-link">Model Card</a></li>
+          <li><a href="/docs" class="nav-link nav-external" target="_blank">API Docs</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔬 SpectraLM</h1>
+            <p>Inference Server Health Status</p>
+            <div class="status-badge" id="status-badge">Loading...</div>
+        </div>
+
+        <div class="content">
+            <!-- Model Status Section -->
+            <div class="model-section">
+                <div class="section-title">
+                    <span>⚙️ Model Status</span>
+                </div>
+                <div class="model-info">
+                    <div class="info-row">
+                        <span class="info-label">Model Loaded</span>
+                        <span class="badge" id="model-badge">Loading</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Device</span>
+                        <span class="info-value" id="device-value">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Epoch</span>
+                        <span class="info-value" id="epoch-value">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Val ECR</span>
+                        <span class="info-value" id="ecr-value">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Checkpoint</span>
+                        <span class="info-value checkpoint" id="checkpoint-value">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">⏱️ Uptime</div>
+                    <div class="metric-value small" id="uptime-metric">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">📊 Requests Served</div>
+                    <div class="metric-value" id="requests-metric">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">⚠️ Errors</div>
+                    <div class="metric-value" id="errors-metric">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">📈 Error Rate</div>
+                    <div class="metric-value error-rate" id="error-rate-metric">—</div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="stats-section">
+                <h3>📋 Quick Statistics</h3>
+                <div class="stat-item">
+                    <span class="stat-label">Server Status</span>
+                    <span class="stat-value" id="server-status">—</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Average Request Size</span>
+                    <span class="stat-value">~1800 floats (IR spectrum)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Typical Inference Time</span>
+                    <span class="stat-value">100-500ms (device dependent)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="timestamp" id="last-updated">Last updated: —</div>
+            <div style="margin-top: 8px; opacity: 0.7;">View API docs at <strong>/docs</strong> | Home at <strong>/</strong></div>
+        </div>
+    </div>
+
+    <script src="/views/health/main.js"></script>
+</body>
+</html>

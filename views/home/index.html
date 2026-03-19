@@ -4,12 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SpectraLM API</title>
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="/views/home/style.css">
 <style>
   :root { --status-color: #1D9E75; }
 </style>
 </head>
 <body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a href="/" class="brand-link">🔬 SpectraLM</a>
+    </div>
+    <ul class="navbar-menu">
+      <li><a href="/" class="nav-link active">Home</a></li>
+      <li><a href="/health" class="nav-link">Health</a></li>
+      <li><a href="/model/info" class="nav-link">Model Card</a></li>
+      <li><a href="/docs" class="nav-link nav-external" target="_blank">API Docs</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="card">
   <div class="header">
     <div class="title">SpectraLM</div>
@@ -60,7 +75,7 @@
     </a>
     <a class="link-row" href="/health">
       <span><span class="link-method get">GET</span> &nbsp;/health</span>
-      <span class="link-arrow">Server health JSON →</span>
+      <span class="link-arrow">Server health dashboard →</span>
     </a>
     <a class="link-row" href="/model/info">
       <span><span class="link-method get">GET</span> &nbsp;/model/info</span>
@@ -82,7 +97,7 @@
     &nbsp;·&nbsp; <span id="last-updated" style="color:#444441;"></span>
   </div>
 </div>
-<script src="/static/main.js"></script>
+<script src="/views/home/main.js"></script>
 </body>
 
 </body>
