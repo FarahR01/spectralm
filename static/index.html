@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpectraLM API</title>
+<link rel="stylesheet" href="./style.css">
+<style>
+  :root { --status-color: #1D9E75; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="title">SpectraLM</div>
+    <div class="subtitle">
+      Physics-informed IR spectrum → molecular identity.<br>
+      Beer–Lambert constraint · Group frequency penalty · Lorentzian peak model.
+    </div>
+  </div>
+
+  <div class="status-row">
+    <div class="status-dot"></div>
+    <span class="status-label">model {status_text}</span>
+    <span style="font-size:0.78rem;color:#444441;margin-left:auto">uptime {uptime}</span>
+  </div>
+
+  <div class="metrics">
+<!-- ECR -->
+<div class="metric">
+  <div class="metric-label">val ECR</div>
+  <div class="metric-val good" id="metric-ecr">{ecr}</div>
+</div>
+    <div class="metric">
+      <div class="metric-label">checkpoint epoch</div>
+      <div class="metric-val">{epoch}</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">parameters</div>
+      <div class="metric-val">{params}</div>
+    </div>
+    <!-- uptime -->
+<div class="metric">
+  <div class="metric-label">uptime</div>
+  <div class="metric-val" id="metric-uptime">{uptime}</div>
+</div>
+    <!-- requests -->
+<div class="metric">
+  <div class="metric-label">requests served</div>
+  <div class="metric-val" id="metric-requests">{state.request_count}</div>
+</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="links">
+    <a class="link-row" href="/docs">
+      <span><span class="link-method get">GET</span> &nbsp;/docs</span>
+      <span class="link-arrow">Interactive API explorer →</span>
+    </a>
+    <a class="link-row" href="/health">
+      <span><span class="link-method get">GET</span> &nbsp;/health</span>
+      <span class="link-arrow">Server health JSON →</span>
+    </a>
+    <a class="link-row" href="/model/info">
+      <span><span class="link-method get">GET</span> &nbsp;/model/info</span>
+      <span class="link-arrow">Full model card →</span>
+    </a>
+    <div class="link-row" style="cursor:default;opacity:0.6;">
+      <span><span class="link-method post">POST</span> &nbsp;/predict</span>
+      <span class="link-arrow">spectrum → SMILES + ECR</span>
+    </div>
+    <div class="link-row" style="cursor:default;opacity:0.6;">
+      <span><span class="link-method post">POST</span> &nbsp;/predict/batch</span>
+      <span class="link-arrow">up to 32 spectra</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    SpectraLM v0.3.0 &nbsp;·&nbsp;
+    <a href="https://github.com/YOURUSERNAME/spectralm"
+       style="color:#444441;text-decoration:none;">github</a>
+    &nbsp;·&nbsp; ECR threshold 0.25
+  </div>
+</div>
+</body>
+<div class="footer">
+    SpectraLM v0.3.0 &nbsp;·&nbsp;
+    <a href="https://github.com/YOURUSERNAME/spectralm" style="color:#444441;text-decoration:none;">github</a>
+    &nbsp;·&nbsp; ECR threshold 0.25
+    &nbsp;·&nbsp; <span id="last-updated" style="color:#444441;"></span>
+  </div>
+</div>
+<script src="/static/main.js"></script>
+</body>
+</html>
