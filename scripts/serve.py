@@ -46,8 +46,7 @@ from pathlib import Path
 from typing import Annotated
 
 import numpy as np
-from rich.default_styles import args
-from rich.default_styles import args
+
 import torch
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request, Depends
@@ -470,19 +469,14 @@ def _raw_to_response(raw: dict) -> PredictResponse:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Load model here so it's available in the same process as uvicorn
-    import os
-    ckpt = os.environ.get("SPECTRALM_CHECKPOINT")
-    device = os.environ.get("SPECTRALM_DEVICE", "cpu")
-    if ckpt and state.model is None:
-        load_model(ckpt, device)
     if state.model is not None:
-        log.info(f"Model ready — epoch={state.loaded_epoch}  val_ecr={state.val_ecr:.4f}")
+        log.info(f"Model ready — epoch={state.loaded_epoch}  "
+                 f"val_ecr={state.val_ecr:.4f}  "
+                 f"params={state.model.num_parameters:,}")
     else:
-        log.warning("No checkpoint specified. Set SPECTRALM_CHECKPOINT env var.")
+        log.warning("No model loaded.")
     yield
-    log.info("Shutting down.")
-
+    log.info("Shutting down SpectraLM server.")
 app = FastAPI(
     title="SpectraLM Inference API",
     description="""
@@ -880,46 +874,27 @@ async def validation_exception_handler(request: Request, exc):
 
 def main():
     parser = argparse.ArgumentParser(description="SpectraLM inference server")
-    parser.add_argument(
-        "--checkpoint", type=str, required=True,
-        help="Path to model checkpoint (.pt file)",
-    )
-    parser.add_argument(
-        "--device", type=str, default="cpu",
-        choices=["cpu", "cuda", "mps"],
-        help="Inference device (default: cpu)",
-    )
-    parser.add_argument(
-        "--host", type=str, default="0.0.0.0",
-        help="Bind host (default: 0.0.0.0)",
-    )
-    parser.add_argument(
-        "--port", type=int, default=8000,
-        help="Port (default: 8000)",
-    )
-    parser.add_argument(
-        "--workers", type=int, default=1,
-        help="Uvicorn worker count (default: 1)",
-    )
-    parser.add_argument(
-        "--reload", action="store_true",
-        help="Hot reload on code changes (dev mode only)",
-    )
+    parser.add_argument("--checkpoint", type=str, required=True)
+    parser.add_argument("--device",     type=str, default="cpu",
+                        choices=["cpu", "cuda", "mps"])
+    parser.add_argument("--host",       type=str, default="0.0.0.0")
+    parser.add_argument("--port",       type=int, default=8000)
     args = parser.parse_args()
 
-    # Load model before starting server
-    import os
-    os.environ["SPECTRALM_CHECKPOINT"] = args.checkpoint
-    os.environ["SPECTRALM_DEVICE"]     = args.device
-    log.info(f"Starting SpectraLM server on {args.host}:{args.port}")
-    log.info(f"API docs → http://{args.host}:{args.port}/docs")
-    log.info(f"Health   → http://{args.host}:{args.port}/health")
+    # Load model BEFORE uvicorn starts — must be in same process
+    load_model(checkpoint_path=args.checkpoint, device=args.device)
 
+    log.info(f"Starting SpectraLM server on {args.host}:{args.port}")
+    log.info(f"API docs → http://localhost:{args.port}/docs")
+    log.info(f"Health   → http://localhost:{args.port}/health")
+
+    # Pass app object directly — NOT the string "scripts.serve:app"
+    # String form causes uvicorn to re-import the module in a new process,
+    # resetting state and losing the loaded model.
     uvicorn.run(
-        "scripts.serve:app",
+        app,
         host=args.host,
         port=args.port,
-        reload=args.reload,
         log_level="warning",
     )
 
