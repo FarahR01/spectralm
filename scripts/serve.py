@@ -46,12 +46,15 @@ from pathlib import Path
 from typing import Annotated
 
 import numpy as np
+from rich.default_styles import args
+from rich.default_styles import args
 import torch
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
+from fastapi.responses import RedirectResponse, HTMLResponse
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -62,6 +65,8 @@ from spectralm.physics.beer_lambert import BeerLambertConstraint
 from spectralm.physics.group_frequencies import (
     GroupFrequencyChecker, GROUP_FREQUENCY_TABLE, WAVENUMBER_AXIS
 )
+# Serve the static folder
+from fastapi.staticfiles import StaticFiles
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -465,15 +470,18 @@ def _raw_to_response(raw: dict) -> PredictResponse:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup / shutdown lifecycle."""
-    # Model is loaded via CLI args before app.run() — nothing to do here
-    # unless running via import (e.g. gunicorn)
-    if state.model is None:
-        log.warning("Model not loaded at startup. "
-                    "Call load_model() before serving requests.")
+    # Load model here so it's available in the same process as uvicorn
+    import os
+    ckpt = os.environ.get("SPECTRALM_CHECKPOINT")
+    device = os.environ.get("SPECTRALM_DEVICE", "cpu")
+    if ckpt and state.model is None:
+        load_model(ckpt, device)
+    if state.model is not None:
+        log.info(f"Model ready — epoch={state.loaded_epoch}  val_ecr={state.val_ecr:.4f}")
+    else:
+        log.warning("No checkpoint specified. Set SPECTRALM_CHECKPOINT env var.")
     yield
-    log.info("Shutting down SpectraLM server.")
-
+    log.info("Shutting down.")
 
 app = FastAPI(
     title="SpectraLM Inference API",
@@ -548,6 +556,33 @@ def require_model():
 # ══════════════════════════════════════════════════════════════════════════════
 # Endpoints
 # ══════════════════════════════════════════════════════════════════════════════
+app.mount("/static", StaticFiles(directory="static"), name="static")
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+async def root():
+    model_ready = state.model is not None
+    status_color = "#1D9E75" if model_ready else "#E24B4A"
+    status_text  = "online" if model_ready else "not loaded"
+    epoch  = state.loaded_epoch if model_ready else "—"
+    ecr    = f"{state.val_ecr:.4f}" if model_ready else "—"
+    params = f"{state.model.num_parameters:,}" if model_ready else "—"
+    uptime = f"{(time.time() - state.server_start_time):.0f}s" if state.server_start_time else "—"
+
+    html = Path("static/index.html").read_text(encoding="utf-8")
+
+    html = html.replace("{status_text}",       status_text)
+    html = html.replace("{status_color}",      status_color)
+
+    html = html.replace("{uptime}",            uptime)
+    html = html.replace("{ecr}",               ecr)
+    html = html.replace("{epoch}",             str(epoch))
+    html = html.replace("{params}",            params)
+    html = html.replace("{state.request_count}", str(state.request_count))
+    html = html.replace(
+        '<link rel="stylesheet" href="./style.css">',
+        '<link rel="stylesheet" href="/static/style.css">'
+    )
+
+    return HTMLResponse(html)
 
 @app.get(
     "/health",
@@ -873,8 +908,9 @@ def main():
     args = parser.parse_args()
 
     # Load model before starting server
-    load_model(checkpoint_path=args.checkpoint, device=args.device)
-
+    import os
+    os.environ["SPECTRALM_CHECKPOINT"] = args.checkpoint
+    os.environ["SPECTRALM_DEVICE"]     = args.device
     log.info(f"Starting SpectraLM server on {args.host}:{args.port}")
     log.info(f"API docs → http://{args.host}:{args.port}/docs")
     log.info(f"Health   → http://{args.host}:{args.port}/health")
@@ -883,9 +919,8 @@ def main():
         "scripts.serve:app",
         host=args.host,
         port=args.port,
-        workers=args.workers,
         reload=args.reload,
-        log_level="info",
+        log_level="warning",
     )
 
 
