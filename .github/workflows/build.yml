@@ -1,0 +1,44 @@
+name: Build Verification
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build wheel
+
+    - name: Build package
+      run: |
+        python -m build
+
+    - name: Verify package contents
+      run: |
+        python -m pip install dist/*.whl
+        python -c "import spectralm; print(f'Successfully imported spectralm {spectralm.__version__}')"
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      if: matrix.python-version == '3.11'
+      with:
+        name: dist
+        path: dist/
