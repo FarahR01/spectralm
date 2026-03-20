@@ -233,6 +233,8 @@ The `evals/failure_cases/` directory contains annotated cases where the model fa
 
 The physics residual (ECR) correctly flags implausible predictions at a **4.5× higher rate** than the no-physics baseline. The failure gallery demonstrates this: every critical failure case shown has ECR > 0.25, and the ECR signal is visible before the predicted SMILES is even inspected.
 
+**[Error analysis](docs/error_analysis.html)** — failure taxonomy, ablation table, BLEU vs ECR tradeoff
+
 ---
 
 ## Inference API

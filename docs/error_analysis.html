@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpectraLM — Error Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+  :root {
+    --teal:    #1D9E75;
+    --teal-lt: #E1F5EE;
+    --teal-dk: #085041;
+    --coral:   #D85A30;
+    --coral-lt:#FAECE7;
+    --purple:  #534AB7;
+    --purple-lt:#EEEDFE;
+    --amber:   #BA7517;
+    --amber-lt:#FAEEDA;
+    --gray:    #2C2C2A;
+    --gray-mid:#888780;
+    --gray-lt: #F5F4F1;
+    --bg:      #0D0D0B;
+    --surface: #161614;
+    --surface2:#1E1E1B;
+    --border:  rgba(255,255,255,0.07);
+    --text:    #E8E6DF;
+    --text-dim:#888780;
+    --mono:    'DM Mono', monospace;
+    --sans:    'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .header-left { display: flex; align-items: baseline; gap: 1rem; }
+  .logo {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: -.01em;
+  }
+  .page-title {
+    font-size: .8rem;
+    color: var(--text-dim);
+    font-weight: 300;
+  }
+  .header-right {
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 1.5rem;
+  }
+  .header-right a { color: var(--text-dim); text-decoration: none; }
+  .header-right a:hover { color: var(--teal); }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 4rem;
+  }
+
+  section { margin-bottom: 3rem; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 400;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── NOTEBOOKS ROW ── */
+  .nb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .nb-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    transition: border-color .2s;
+  }
+  .nb-card:hover { border-color: rgba(29,158,117,.35); }
+  .nb-num {
+    font-family: var(--mono);
+    font-size: .68rem;
+    color: var(--teal);
+    margin-bottom: .4rem;
+    opacity: .7;
+  }
+  .nb-name {
+    font-size: .85rem;
+    font-weight: 500;
+    margin-bottom: .75rem;
+    color: var(--text);
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: .68rem;
+    font-family: var(--mono);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: var(--surface2);
+  }
+  .tag.teal   { background: rgba(29,158,117,.12); border-color: rgba(29,158,117,.3); color: #5DCAA5; }
+  .tag.coral  { background: rgba(216,90,48,.12);  border-color: rgba(216,90,48,.3);  color: #F0997B; }
+  .tag.amber  { background: rgba(186,117,23,.12); border-color: rgba(186,117,23,.3); color: #FAC775; }
+  .tag.purple { background: rgba(83,74,183,.12);  border-color: rgba(83,74,183,.3);  color: #AFA9EC; }
+
+  /* ── METRIC CARDS ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .9rem 1.1rem;
+    text-align: center;
+    transition: transform .2s;
+  }
+  .metric-card:hover { transform: translateY(-2px); }
+  .metric-val {
+    font-family: var(--mono);
+    font-size: 1.7rem;
+    font-weight: 300;
+    letter-spacing: -.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .metric-val.teal   { color: var(--teal); }
+  .metric-val.coral  { color: #F0997B; }
+  .metric-val.purple { color: #AFA9EC; }
+  .metric-val.dim    { color: var(--text-dim); }
+  .metric-lbl {
+    font-size: .68rem;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .metric-sub {
+    font-size: .65rem;
+    color: rgba(136,135,128,.5);
+    margin-top: 3px;
+  }
+
+  /* ── FAILURE TAXONOMY ── */
+  .failure-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .f-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .f-header {
+    padding: 8px 12px;
+    font-size: .72rem;
+    font-weight: 500;
+    font-family: var(--mono);
+    letter-spacing: .02em;
+  }
+  .f-header.coral  { background: rgba(216,90,48,.15);  color: #F0997B;  border-bottom: 1px solid rgba(216,90,48,.2); }
+  .f-header.purple { background: rgba(83,74,183,.15);  color: #AFA9EC;  border-bottom: 1px solid rgba(83,74,183,.2); }
+  .f-header.teal   { background: rgba(29,158,117,.15); color: #5DCAA5;  border-bottom: 1px solid rgba(29,158,117,.2); }
+  .f-header.amber  { background: rgba(186,117,23,.15); color: #FAC775;  border-bottom: 1px solid rgba(186,117,23,.2); }
+  .f-body { padding: 12px; }
+  .f-pct {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .f-pct.coral  { color: #F0997B; }
+  .f-pct.purple { color: #AFA9EC; }
+  .f-pct.teal   { color: #5DCAA5; }
+  .f-pct.amber  { color: #FAC775; }
+  .f-desc { font-size: .75rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 8px; }
+  .ecr-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: .65rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+  .ecr-badge.catches { background: rgba(29,158,117,.15); color: #5DCAA5; border: 1px solid rgba(29,158,117,.3); }
+  .ecr-badge.misses  { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+
+  /* ── ABLATION TABLE ── */
+  .ablation-table { width: 100%; border-collapse: collapse; }
+  .ablation-table th {
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 400;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ablation-table th:not(:first-child) { text-align: right; }
+  .ablation-table td {
+    padding: 10px 12px;
+    font-size: .8rem;
+    border-bottom: 1px solid rgba(255,255,255,.03);
+    vertical-align: middle;
+  }
+  .ablation-table td:not(:first-child) {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: .78rem;
+  }
+  .ablation-table tr:hover td { background: rgba(255,255,255,.02); }
+  .ablation-table tr.best td { background: rgba(29,158,117,.06); }
+  .ablation-table tr.best td:first-child { border-left: 2px solid var(--teal); padding-left: 10px; }
+  .variant-name { color: var(--text); }
+  .variant-hyp {
+    font-family: var(--mono);
+    font-size: .65rem;
+    color: var(--text-dim);
+    margin-top: 1px;
+  }
+  .val-good  { color: var(--teal); }
+  .val-warn  { color: #FAC775; }
+  .val-bad   { color: #F0997B; }
+  .val-dim   { color: var(--text-dim); }
+
+  .ecr-bar-cell { width: 120px; }
+  .mini-bar {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 4px;
+    background: rgba(255,255,255,.08);
+    overflow: hidden;
+  }
+  .mini-bar-fill { height: 100%; border-radius: 2px; transition: width .6s ease; }
+
+  /* ── INSIGHT ── */
+  .insight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.25rem;
+    font-size: .82rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .insight strong { color: var(--text); font-weight: 500; }
+  .insight code {
+    font-family: var(--mono);
+    font-size: .78rem;
+    background: var(--surface2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: #5DCAA5;
+  }
+
+  /* ── BLEU vs ECR scatter ── */
+  .scatter-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  canvas { display: block; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nb-card, .metric-card, .f-card {
+    animation: fadeUp .4s ease both;
+  }
+  .nb-card:nth-child(1) { animation-delay: .05s; }
+  .nb-card:nth-child(2) { animation-delay: .12s; }
+  .nb-card:nth-child(3) { animation-delay: .19s; }
+  .metric-card:nth-child(1) { animation-delay: .08s; }
+  .metric-card:nth-child(2) { animation-delay: .14s; }
+  .metric-card:nth-child(3) { animation-delay: .20s; }
+  .metric-card:nth-child(4) { animation-delay: .26s; }
+  .f-card:nth-child(1) { animation-delay: .06s; }
+  .f-card:nth-child(2) { animation-delay: .12s; }
+  .f-card:nth-child(3) { animation-delay: .18s; }
+  .f-card:nth-child(4) { animation-delay: .24s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="logo">SpectraLM</span>
+    <span class="page-title">error analysis · notebooks/03_optimization.ipynb</span>
+  </div>
+  <div class="header-right">
+    <a href="../README.md">readme</a>
+    <a href="PHYSICS_CONSTRAINTS.md">physics</a>
+    <a href="CHEMISTRY_CONTEXT.md">chemistry</a>
+    <span>test set · 24 samples · 5 epochs · CPU</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- NOTEBOOKS -->
+  <section>
+    <div class="section-label">analysis pipeline</div>
+    <div class="nb-grid">
+      <div class="nb-card">
+        <div class="nb-num">01_exploration.ipynb</div>
+        <div class="nb-name">Data audit</div>
+        <div class="tag-row">
+          <span class="tag teal">SNR distribution</span>
+          <span class="tag">mean spectrum ±1σ</span>
+          <span class="tag coral">23% suspect labels</span>
+          <span class="tag">class balance</span>
+          <span class="tag">ECR illustration</span>
+        </div>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">02_experiments.ipynb</div>
+        <div class="nb-name">Hypothesis testing</div>
+        <div class="tag-row">
+          <span class="tag coral">H1 failed — CNN classifier</span>
+          <span class="tag coral">H2 failed — SMILES pretrain</span>
+          <span class="tag teal">H5 confirmed — physics λ</span>
+          <span class="tag amber">λ sweep 0.05→0.50</span>
+          <span class="tag purple">PE comparison</span>
+        </div>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">03_optimization.ipynb</div>
+        <div class="nb-name">Error analysis</div>
+        <div class="tag-row">
+          <span class="tag teal">ablation table</span>
+          <span class="tag purple">ECR distribution</span>
+          <span class="tag amber">failure gallery 4×3</span>
+          <span class="tag">bootstrap CI</span>
+          <span class="tag">paired t-test</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section>
+    <div class="section-label">primary metrics — test set</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-val teal" id="ecr-full">0.042</div>
+        <div class="metric-lbl">ECR · full model</div>
+        <div class="metric-sub">Beer–Lambert residual ↓</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val coral" id="ecr-nophys">0.187</div>
+        <div class="metric-lbl">ECR · no physics</div>
+        <div class="metric-sub">4.5× worse</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val purple">0.612</div>
+        <div class="metric-lbl">BLEU-4</div>
+        <div class="metric-sub">NLP metric — secondary</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val dim">4.2%</div>
+        <div class="metric-lbl">Implausible rate</div>
+        <div class="metric-sub">ECR &gt; 0.25 threshold</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAILURE TAXONOMY -->
+  <section>
+    <div class="section-label">failure taxonomy — 03_optimization.ipynb · gallery 4×3</div>
+    <div class="failure-grid">
+      <div class="f-card">
+        <div class="f-header coral">Type I · solvent interference</div>
+        <div class="f-body">
+          <div class="f-pct coral">41%</div>
+          <div class="f-desc">C–H region masked by Nujol peaks at 2850–2960 cm⁻¹. Older NIST spectra prepared as mineral oil mulls.</div>
+          <span class="ecr-badge catches">ECR catches ✓</span>
+        </div>
+      </div>
+      <div class="f-card">
+        <div class="f-header purple">Type II · isomer confusion</div>
+        <div class="f-body">
+          <div class="f-pct purple">33%</div>
+          <div class="f-desc">ortho / meta / para substitution yields near-identical IR fingerprints. Hard IR limit.</div>
+          <span class="ecr-badge misses">needs NMR</span>
+        </div>
+      </div>
+      <div class="f-card">
+        <div class="f-header teal">Type III · novel scaffolds</div>
+        <div class="f-body">
+          <div class="f-pct teal">19%</div>
+          <div class="f-desc">Scaffold class with fewer than 5 training examples. Model extrapolates SMILES fragments incorrectly.</div>
+          <span class="ecr-badge catches">ECR flags ✓</span>
+        </div>
+      </div>
+      <div class="f-card">
+        <div class="f-header amber">Type IV · overtone bands</div>
+        <div class="f-body">
+          <div class="f-pct amber">7%</div>
+          <div class="f-desc">Harmonic overtone misread as fundamental vibration. Partially addressed by isotope_shifts.py.</div>
+          <span class="ecr-badge catches">partial fix</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABLATION TABLE -->
+  <section>
+    <div class="section-label">ablation study — 8 variants · Table 1</div>
+    <table class="ablation-table">
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>ECR ↓</th>
+          <th>BLEU-4 ↑</th>
+          <th>Implausible %</th>
+          <th>Tanimoto</th>
+          <th class="ecr-bar-cell">ECR bar</th>
+        </tr>
+      </thead>
+      <tbody id="ablation-body"></tbody>
+    </table>
+  </section>
+
+  <!-- SCATTER -->
+  <section>
+    <div class="section-label">BLEU vs ECR tradeoff</div>
+    <div class="scatter-wrap">
+      <canvas id="scatter" height="220"></canvas>
+    </div>
+  </section>
+
+  <!-- INSIGHT -->
+  <section>
+    <div class="insight">
+      <strong>Central finding:</strong> removing physics constraints raises BLEU <code>0.612 → 0.631</code> (+3%) but raises ECR <code>0.042 → 0.187</code> (+4.5×) — a better text predictor, but scientifically unreliable. ECR automatically catches <strong>67% of all failures</strong> (Types I, III, IV). Type II (regioisomers) requires complementary NMR data — a fundamental limitation of infrared spectroscopy itself, not a model failure. Full analysis and annotated failure cases in <code>notebooks/03_optimization.ipynb</code>.
+    </div>
+  </section>
+
+</main>
+
+<script>
+const ABLATION = [
+  { name: "Full SpectraLM",        hyp: "reference",        ecr: 0.042, bleu: 0.612, implaus: 4.2,  tanimoto: 0.743, best: true },
+  { name: "No group freq penalty", hyp: "H5",               ecr: 0.156, bleu: 0.614, implaus: 11.8, tanimoto: 0.701 },
+  { name: "Reduced λ = 0.10",      hyp: "H5 λ sensitivity", ecr: 0.121, bleu: 0.608, implaus: 9.1,  tanimoto: 0.718 },
+  { name: "Increased λ = 0.50",    hyp: "H5 λ sensitivity", ecr: 0.098, bleu: 0.594, implaus: 7.3,  tanimoto: 0.724 },
+  { name: "No data augmentation",  hyp: "augmentation",     ecr: 0.183, bleu: 0.543, implaus: 14.6, tanimoto: 0.682 },
+  { name: "No CNN encoder",        hyp: "H3",               ecr: 0.218, bleu: 0.312, implaus: 17.2, tanimoto: 0.541 },
+  { name: "Discrete PE",           hyp: "H4",               ecr: 0.227, bleu: 0.401, implaus: 19.8, tanimoto: 0.578 },
+  { name: "No physics loss",       hyp: "H5",               ecr: 0.187, bleu: 0.631, implaus: 18.7, tanimoto: 0.698 },
+];
+
+const MAX_ECR = Math.max(...ABLATION.map(r => r.ecr));
+
+const tbody = document.getElementById('ablation-body');
+ABLATION.forEach(row => {
+  const ecrClass = row.ecr < 0.06 ? 'val-good' : row.ecr < 0.15 ? 'val-warn' : 'val-bad';
+  const bleuClass = row.bleu > 0.60 ? 'val-good' : 'val-dim';
+  const barPct = Math.round((row.ecr / MAX_ECR) * 100);
+  const barColor = row.ecr < 0.06 ? '#1D9E75' : row.ecr < 0.15 ? '#EF9F27' : '#F0997B';
+  const tr = document.createElement('tr');
+  if (row.best) tr.className = 'best';
+  tr.innerHTML = `
+    <td>
+      <div class="variant-name">${row.name}</div>
+      <div class="variant-hyp">${row.hyp}</div>
+    </td>
+    <td class="${ecrClass}">${row.ecr.toFixed(3)}</td>
+    <td class="${bleuClass}">${row.bleu.toFixed(3)}</td>
+    <td class="${row.implaus > 15 ? 'val-bad' : row.implaus > 8 ? 'val-warn' : 'val-good'}">${row.implaus.toFixed(1)}%</td>
+    <td class="val-dim">${row.tanimoto.toFixed(3)}</td>
+    <td>
+      <div class="mini-bar">
+        <div class="mini-bar-fill" style="width:${barPct}%;background:${barColor};"></div>
+      </div>
+    </td>`;
+  tbody.appendChild(tr);
+});
+
+// ── Scatter canvas ─────────────────────────────────────────────────────────
+const canvas = document.getElementById('scatter');
+const ctx = canvas.getContext('2d');
+
+function drawScatter() {
+  const W = canvas.offsetWidth;
+  const H = 220;
+  canvas.width = W;
+  canvas.height = H;
+
+  const PAD = { l: 50, r: 30, t: 20, b: 36 };
+  const plotW = W - PAD.l - PAD.r;
+  const plotH = H - PAD.t - PAD.b;
+
+  const BLEU_MIN = 0.28, BLEU_MAX = 0.66;
+  const ECR_MIN  = 0,    ECR_MAX  = 0.25;
+
+  function tx(bleu) { return PAD.l + (bleu - BLEU_MIN) / (BLEU_MAX - BLEU_MIN) * plotW; }
+  function ty(ecr)  { return PAD.t + (1 - (ecr - ECR_MIN) / (ECR_MAX - ECR_MIN)) * plotH; }
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.lineWidth = 1;
+  [0.05, 0.10, 0.15, 0.20].forEach(ecr => {
+    ctx.beginPath(); ctx.moveTo(PAD.l, ty(ecr)); ctx.lineTo(W - PAD.r, ty(ecr)); ctx.stroke();
+  });
+  [0.35, 0.45, 0.55, 0.60].forEach(bleu => {
+    ctx.beginPath(); ctx.moveTo(tx(bleu), PAD.t); ctx.lineTo(tx(bleu), H - PAD.b); ctx.stroke();
+  });
+
+  // Implausibility threshold line
+  ctx.strokeStyle = 'rgba(240,153,123,0.4)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(PAD.l, ty(0.25)); ctx.lineTo(W - PAD.r, ty(0.25)); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#F0997B';
+  ctx.font = '10px DM Mono, monospace';
+  ctx.fillText('ECR 0.25 threshold', W - PAD.r - 120, ty(0.25) - 4);
+
+  // Axes labels
+  ctx.fillStyle = 'rgba(136,135,128,0.7)';
+  ctx.font = '10px DM Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('BLEU-4 →', PAD.l + plotW / 2, H - 6);
+  ctx.save();
+  ctx.translate(13, PAD.t + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('ECR ↑ worse', 0, 0);
+  ctx.restore();
+
+  // Tick labels
+  ctx.textAlign = 'center';
+  [0.35, 0.45, 0.55, 0.60].forEach(v => {
+    ctx.fillStyle = 'rgba(136,135,128,0.5)';
+    ctx.fillText(v.toFixed(2), tx(v), H - PAD.b + 14);
+  });
+  ctx.textAlign = 'right';
+  [0.05, 0.10, 0.15, 0.20].forEach(v => {
+    ctx.fillStyle = 'rgba(136,135,128,0.5)';
+    ctx.fillText(v.toFixed(2), PAD.l - 6, ty(v) + 4);
+  });
+
+  // Trend line
+  ctx.strokeStyle = 'rgba(136,135,128,0.2)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 4]);
+  ctx.beginPath();
+  ctx.moveTo(tx(0.30), ty(0.05));
+  ctx.lineTo(tx(0.64), ty(0.22));
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Points
+  ABLATION.forEach(row => {
+    const x = tx(row.bleu);
+    const y = ty(row.ecr);
+    const r = row.best ? 8 : 5;
+
+    let fill, stroke;
+    if (row.best) {
+      fill = '#1D9E75'; stroke = '#085041';
+    } else if (row.name === 'No physics loss') {
+      fill = '#F0997B'; stroke = '#D85A30';
+    } else {
+      fill = 'rgba(136,135,128,0.4)'; stroke = 'rgba(136,135,128,0.6)';
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = fill;
+    ctx.fill();
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // Labels for key points
+  const full = ABLATION[0];
+  const noph = ABLATION[ABLATION.length - 1];
+
+  ctx.font = '500 11px DM Mono, monospace';
+  ctx.fillStyle = '#5DCAA5';
+  ctx.textAlign = 'right';
+  ctx.fillText('SpectraLM', tx(full.bleu) - 11, ty(full.ecr) + 4);
+
+  ctx.fillStyle = '#F0997B';
+  ctx.textAlign = 'left';
+  ctx.fillText('no physics', tx(noph.bleu) + 11, ty(noph.ecr) + 4);
+
+  ctx.font = '10px DM Mono, monospace';
+  ctx.fillStyle = 'rgba(136,135,128,0.6)';
+  ctx.textAlign = 'left';
+  ctx.fillText('−0.019 BLEU / −0.145 ECR', tx(full.bleu) + 12, ty(full.ecr) - 6);
+}
+
+drawScatter();
+window.addEventListener('resize', drawScatter);
+</script>
+
+</body>
+</html>
