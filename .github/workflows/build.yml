@@ -37,7 +37,7 @@ jobs:
         python -c "import spectralm; print(f'Successfully imported spectralm {spectralm.__version__}')"
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: matrix.python-version == '3.11'
       with:
         name: dist
