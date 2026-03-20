@@ -353,8 +353,9 @@ class FailureCaseCollector:
 
         cases: list[FailureCase] = []
         for sr in worst:
-            obs_np   = np.zeros(1800)  # placeholder — re-fetch from loader
-            recon_np = np.zeros(1800)
+            # Use stored spectra from evaluation results
+            obs_np   = sr.observed_spectrum if sr.observed_spectrum.size > 0 else np.zeros(1800)
+            recon_np = sr.reconstructed_spectrum if sr.reconstructed_spectrum.size > 0 else np.zeros(1800)
 
             failure_type, severity = self.tagger.tag(
                 observed=obs_np,

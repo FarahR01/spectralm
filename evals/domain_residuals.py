@@ -109,6 +109,7 @@ class SampleResult:
     gf_recall: float
     gf_violation_count: int
     gf_groups_checked: int
+    gf_violated_group_names: list = field(default_factory=list)  # Names of violated groups
 
     # NLP metrics
     token_accuracy: float
@@ -522,7 +523,7 @@ class DomainResidualScorer:
             if s.gf_violation_count > 0:
                 # Re-run checker to get which groups violated
                 gf_rep = self.gf_checker.check(
-                    np.zeros(1800),  # placeholder — violations counted at eval time
+                    np.zeros(1800),  
                     s.predicted_smiles,
                 )
                 for v in gf_rep.violations:
